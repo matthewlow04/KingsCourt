@@ -23,11 +23,21 @@ class Player{
         self.position = position
     }
     enum Position: String, Codable, CaseIterable {
-        case PG = "Point Guard"
-        case SG = "Shooting Guard"
-        case SF = "Small Forward"
-        case PF = "Power Forward"
-        case C = "Center"
+        case PG = "PG"
+        case SG = "SG"
+        case SF = "SF"
+        case PF = "PF"
+        case C = "C"
+        
+        var description: String {
+            switch self {
+            case .PG: return "Point Guard"
+            case .SG: return "Shooting Guard"
+            case .SF: return "Small Forward"
+            case .PF: return "Power Forward"
+            case .C: return "Center"
+            }
+        }
     }
     
    

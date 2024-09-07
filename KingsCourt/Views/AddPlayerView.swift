@@ -8,10 +8,64 @@
 import SwiftUI
 
 struct AddPlayerView: View {
+    @StateObject var vm = AddPlayerViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 20) {
+                Group{
+                    Text("First Name")
+                    TextField("First Name", text: $vm.firstName)
+                        .modifier(FormTextfieldModifier())
+                        .padding(.horizontal, 2)
+                }
+               
+                Group{
+                    Text("Last Name")
+                    TextField("Last Name", text: $vm.lastName)
+                        .modifier(FormTextfieldModifier())
+                        .padding(.horizontal, 2)
+                }
+                Group{
+                    Text("Notes")
+                    TextField("Notes", text: $vm.notes)
+                        .modifier(FormTextfieldModifier())
+                        .padding(.horizontal, 2)
+                }
+                Group{
+                    Text("Positions")
+                    HStack{
+                        Spacer()
+                        HStack {
+                            ForEach(Player.Position.allCases, id: \.self) { position in
+                                Button(action: {
+                                    vm.togglePosition(position)
+                                }) {
+                                    Text(position.rawValue)
+                                        .modifier(PickerCapsuleModifier())
+                                        .opacity(vm.isPositionSelected(position) ? 1.0 : 0.3)
+                                }
+                            }
+                        }
+                        Spacer()
+                    }
+                }
+                
+                Spacer()
+                
+                Button("Add Player"){
+                    
+                }
+                .modifier(GoButtonModifier())
+                .padding(.vertical)
+    
+            }
+            .padding(.horizontal)
+            .navigationTitle("Add Player")
+        }
     }
 }
+
 
 #Preview {
     AddPlayerView()

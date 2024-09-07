@@ -43,6 +43,25 @@ struct GoButtonModifier: ViewModifier{
     }
 }
 
+struct FormTextfieldModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 0.5))
+
+    }
+}
+
+struct PickerCapsuleModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .frame(width: 60)
+            .background(Capsule().stroke(lineWidth: 0.5))
+    }
+}
+
 
 
 
