@@ -14,6 +14,14 @@
 		A027BF6D2C8BAE9A00AE52E7 /* KingsCourtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF6C2C8BAE9A00AE52E7 /* KingsCourtTests.swift */; };
 		A027BF772C8BAE9A00AE52E7 /* KingsCourtUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF762C8BAE9A00AE52E7 /* KingsCourtUITests.swift */; };
 		A027BF792C8BAE9A00AE52E7 /* KingsCourtUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF782C8BAE9A00AE52E7 /* KingsCourtUITestsLaunchTests.swift */; };
+		A027BF8A2C8BB26200AE52E7 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF892C8BB26200AE52E7 /* PlayerView.swift */; };
+		A027BF8C2C8BB26A00AE52E7 /* AddPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF8B2C8BB26A00AE52E7 /* AddPlayerView.swift */; };
+		A027BF8E2C8BB26F00AE52E7 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF8D2C8BB26F00AE52E7 /* StatsView.swift */; };
+		A027BF902C8BB27A00AE52E7 /* GameLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF8F2C8BB27A00AE52E7 /* GameLogView.swift */; };
+		A027BF922C8BB28600AE52E7 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF912C8BB28600AE52E7 /* PlayView.swift */; };
+		A027BF942C8BE84300AE52E7 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF932C8BE84300AE52E7 /* PlayViewModel.swift */; };
+		A027BF962C8BE8CD00AE52E7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF952C8BE8CD00AE52E7 /* Player.swift */; };
+		A027BF992C8BEA6700AE52E7 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027BF982C8BEA6700AE52E7 /* Modifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +52,14 @@
 		A027BF722C8BAE9A00AE52E7 /* KingsCourtUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KingsCourtUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A027BF762C8BAE9A00AE52E7 /* KingsCourtUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingsCourtUITests.swift; sourceTree = "<group>"; };
 		A027BF782C8BAE9A00AE52E7 /* KingsCourtUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingsCourtUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A027BF892C8BB26200AE52E7 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		A027BF8B2C8BB26A00AE52E7 /* AddPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerView.swift; sourceTree = "<group>"; };
+		A027BF8D2C8BB26F00AE52E7 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		A027BF8F2C8BB27A00AE52E7 /* GameLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogView.swift; sourceTree = "<group>"; };
+		A027BF912C8BB28600AE52E7 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
+		A027BF932C8BE84300AE52E7 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
+		A027BF952C8BE8CD00AE52E7 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		A027BF982C8BEA6700AE52E7 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				A027BF5B2C8BAE9900AE52E7 /* KingsCourtApp.swift */,
-				A027BF5D2C8BAE9900AE52E7 /* ContentView.swift */,
+				A027BF882C8BAF3C00AE52E7 /* Views */,
+				A027BF872C8BAF2B00AE52E7 /* Models */,
+				A027BF862C8BAF2200AE52E7 /* VIewModels */,
+				A027BF852C8BAF1300AE52E7 /* Tools */,
 				A027BF5F2C8BAE9A00AE52E7 /* Assets.xcassets */,
 				A027BF612C8BAE9A00AE52E7 /* Preview Content */,
 			);
@@ -125,6 +144,51 @@
 				A027BF782C8BAE9A00AE52E7 /* KingsCourtUITestsLaunchTests.swift */,
 			);
 			path = KingsCourtUITests;
+			sourceTree = "<group>";
+		};
+		A027BF852C8BAF1300AE52E7 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				A027BF982C8BEA6700AE52E7 /* Modifiers.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		A027BF862C8BAF2200AE52E7 /* VIewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A027BF932C8BE84300AE52E7 /* PlayViewModel.swift */,
+			);
+			path = VIewModels;
+			sourceTree = "<group>";
+		};
+		A027BF872C8BAF2B00AE52E7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A027BF952C8BE8CD00AE52E7 /* Player.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A027BF882C8BAF3C00AE52E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A027BF972C8BEA1100AE52E7 /* PlayView */,
+				A027BF5D2C8BAE9900AE52E7 /* ContentView.swift */,
+				A027BF8F2C8BB27A00AE52E7 /* GameLogView.swift */,
+				A027BF8D2C8BB26F00AE52E7 /* StatsView.swift */,
+				A027BF8B2C8BB26A00AE52E7 /* AddPlayerView.swift */,
+				A027BF892C8BB26200AE52E7 /* PlayerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A027BF972C8BEA1100AE52E7 /* PlayView */ = {
+			isa = PBXGroup;
+			children = (
+				A027BF912C8BB28600AE52E7 /* PlayView.swift */,
+			);
+			path = PlayView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +321,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A027BF942C8BE84300AE52E7 /* PlayViewModel.swift in Sources */,
+				A027BF8A2C8BB26200AE52E7 /* PlayerView.swift in Sources */,
+				A027BF902C8BB27A00AE52E7 /* GameLogView.swift in Sources */,
+				A027BF8E2C8BB26F00AE52E7 /* StatsView.swift in Sources */,
+				A027BF992C8BEA6700AE52E7 /* Modifiers.swift in Sources */,
+				A027BF922C8BB28600AE52E7 /* PlayView.swift in Sources */,
 				A027BF5E2C8BAE9900AE52E7 /* ContentView.swift in Sources */,
 				A027BF5C2C8BAE9900AE52E7 /* KingsCourtApp.swift in Sources */,
+				A027BF962C8BE8CD00AE52E7 /* Player.swift in Sources */,
+				A027BF8C2C8BB26A00AE52E7 /* AddPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
