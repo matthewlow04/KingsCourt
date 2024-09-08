@@ -4,12 +4,102 @@
 //
 //  Created by Matthew Low on 2024-09-06.
 //
-
 import SwiftUI
 
 struct StatsView: View {
+    @StateObject var vm = StatsViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                HStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            TextField("Search by Name", text: $vm.searchText)
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                                .autocorrectionDisabled(true)
+                            
+                            HStack {
+                                Text("Filters: ")
+                                
+                                ForEach(Player.Position.allCases, id: \.self) { position in
+                                    Button {
+                                        if vm.selectedPositions.contains(position) {
+                                            vm.selectedPositions.removeAll { $0 == position }
+                                        } else {
+                                            vm.selectedPositions.append(position)
+                                        }
+                                    } label: {
+                                        Text(position.rawValue)
+                                    }
+                                    .scaleEffect(vm.selectedPositions.contains(position) ? 1.3 : 1.1)
+                                    .foregroundStyle(vm.selectedPositions.contains(position) ? Color.accentColor : .gray)
+                                }
+                            }
+                            .font(.caption)
+                            .foregroundStyle(.gray)
+                        }
+                    }
+                    .padding(3)
+                    .padding(.vertical, 7)
+                    .background(RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 0.5))
+                    
+                    Spacer()
+                    Menu {
+                        Picker("Sorting Options", selection: $vm.sortOption) {
+                            Text("Alphabetical").tag(0)
+                            Text("Points").tag(1)
+                            Text("Assists").tag(2)
+                            Text("Rebounds").tag(3)
+                            Text("Date Created").tag(4)
+                        }
+                    }
+                    label: {
+                        VStack{
+                            Text("Sort")
+                            Text("Type")
+                        }
+                        
+                    }
+                    
+                    Button {
+                        vm.sortDescending.toggle()
+                    } label: {
+                        Image(systemName: vm.sortDescending ? "arrow.down" : "arrow.up")
+                    }
+                    .animation(.easeIn, value: vm.sortDescending)
+                    
+                }
+                .padding(.horizontal)
+            }
+            
+            ScrollView {
+                VStack {
+                    ForEach(vm.sortedPlayers) { player in
+                        VStack {
+                            NavigationLink(destination: Text("Player Details for \(player.name)")) {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(player.name)
+                                        Text(player.position.map { $0.rawValue }.joined(separator: ", "))
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                }
+                            }
+                            Divider()
+                        }
+                    }
+                }
+                .animation(.easeIn, value: vm.sortedPlayers)
+            }
+            .padding()
+            .navigationTitle("Stats")
+        }
     }
 }
 
