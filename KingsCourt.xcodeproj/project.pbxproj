@@ -29,6 +29,7 @@
 		A06EBC652C8E670C0009B6D8 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */; };
 		A06EBC672C8E84020009B6D8 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC662C8E84020009B6D8 /* GameView.swift */; };
 		A06EBC692C8E84CC0009B6D8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */; };
+		A06EBC6B2C8E9E6C0009B6D8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC6A2C8E9E6C0009B6D8 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		A06EBC662C8E84020009B6D8 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		A06EBC6A2C8E9E6C0009B6D8 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 			children = (
 				A027BF952C8BE8CD00AE52E7 /* Player.swift */,
 				A06EBC5E2C8C33420009B6D8 /* Team.swift */,
+				A06EBC6A2C8E9E6C0009B6D8 /* Game.swift */,
 				A06EBC602C8C33AC0009B6D8 /* GameHistory.swift */,
 			);
 			path = Models;
@@ -343,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A06EBC632C8E07000009B6D8 /* StatsViewModel.swift in Sources */,
+				A06EBC6B2C8E9E6C0009B6D8 /* Game.swift in Sources */,
 				A06EBC5F2C8C33420009B6D8 /* Team.swift in Sources */,
 				A027BF942C8BE84300AE52E7 /* PlayViewModel.swift in Sources */,
 				A027BF8A2C8BB26200AE52E7 /* PlayerView.swift in Sources */,

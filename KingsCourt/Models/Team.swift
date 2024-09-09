@@ -7,16 +7,18 @@
 
 import Foundation
 
-class Team{
-    var players: [Player]
+class Team: ObservableObject {
+    @Published var players: [Player]
+    @Published var points: Int
     var type: Team.Side
     
-    init(players: [Player], type: Team.Side) {
+    init(players: [Player], type: Team.Side, points: Int = 0) {
         self.players = players
         self.type = type
+        self.points = points
     }
     
-    enum Side{
+    enum Side {
         case home
         case away
     }

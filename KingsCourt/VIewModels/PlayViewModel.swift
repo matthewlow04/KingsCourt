@@ -13,7 +13,7 @@ class PlayViewModel: ObservableObject {
     @Published var homeTeam: [Player?] = [nil]
     @Published var awayTeam: [Player?] = [nil]
     @Published var searchText = ""
-    @Published var currentTeam = Team.home
+    @Published var currentTeam = TeamType.home
     @Published var gameOption = 1 {
         didSet {
             resizeTeams(to: gameOption)
@@ -40,7 +40,7 @@ class PlayViewModel: ObservableObject {
         return homeTeam.allSatisfy { $0 != nil } && awayTeam.allSatisfy { $0 != nil }
     }
 
-    enum Team {
+    enum TeamType {
         case away
         case home
     }
@@ -80,4 +80,5 @@ class PlayViewModel: ObservableObject {
     private func compactTeam(_ team: inout [Player?]) {
         team = team.compactMap { $0 } + Array(repeating: nil, count: gameOption - team.compactMap { $0 }.count)
     }
+    
 }

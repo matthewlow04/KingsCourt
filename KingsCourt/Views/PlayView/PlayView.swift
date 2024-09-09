@@ -34,7 +34,7 @@ struct PlayView: View {
                             Text("Home Team")
                             ForEach(0..<vm.gameOption, id: \.self) { index in
                                 if let player = vm.homeTeam[index] {
-                                    Text(player.firstName + " " + player.lastName)
+                                    Text("\(player.firstName) \(player.lastName)")
                                         .modifier(PlayerPickModifier())
                                 } else {
                                     Text("Empty Spot")
@@ -56,7 +56,7 @@ struct PlayView: View {
                             Text("Away Team")
                             ForEach(0..<vm.gameOption, id: \.self) { index in
                                 if let player = vm.awayTeam[index] {
-                                    Text(player.firstName + " " + player.lastName)
+                                    Text("\(player.firstName) \(player.lastName)")
                                         .modifier(PlayerPickModifier())
                                 } else {
                                     Text("Empty Spot")
@@ -77,7 +77,9 @@ struct PlayView: View {
                     Divider()
                         .padding()
                     
-                    NavigationLink(destination: GameView()) {
+                    NavigationLink(
+                        destination: GameView(homeTeam: Team(players: vm.homeTeam.compactMap({$0}), type: .home), awayTeam: Team(players: vm.awayTeam.compactMap({$0}), type: .away))
+                    ) {
                         Text("Let's Go")
                             .modifier(GoButtonModifier())
                     }

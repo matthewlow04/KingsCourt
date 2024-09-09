@@ -7,8 +7,7 @@
 
 import Foundation
 
-class GameViewModel: ObservableObject{
-    @Published var homeTeam = Team(players: [], type: .home)
-    @Published var awayTeam = Team(players: [], type: .away)
-    @Published var isAdding = true
+class GameViewModel: ObservableObject {
+    @Published var isAdding: Bool = true
 }
+

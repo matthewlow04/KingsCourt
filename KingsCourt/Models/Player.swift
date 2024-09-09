@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Player: Identifiable, Equatable{
+class Player: ObservableObject, Identifiable, Equatable{
     var id: UUID
     var firstName: String
     var lastName: String
@@ -21,11 +21,11 @@ class Player: Identifiable, Equatable{
     var games: Int = 0
     var wins: Int = 0
     var losses: Int = 0
-    var gamePoints: Int = 0
-    var gameAssists: Int = 0
-    var gameRebounds: Int = 0
-    var gameSteals: Int = 0
-    var gameBlocks: Int = 0
+    @Published var gamePoints: Int = 0
+    @Published var gameAssists: Int = 0
+    @Published var gameRebounds: Int = 0
+    @Published var gameSteals: Int = 0
+    @Published var gameBlocks: Int = 0
     
     var ppg: Double{
         return points/Double(games)
