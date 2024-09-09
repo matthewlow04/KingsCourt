@@ -6,11 +6,8 @@
 //
 
 import Foundation
-import SwiftData
 
-
-@Model
-class Player{
+class Player: Identifiable, Equatable{
     var id: UUID
     var firstName: String
     var lastName: String
@@ -24,6 +21,11 @@ class Player{
     var games: Int = 0
     var wins: Int = 0
     var losses: Int = 0
+    var gamePoints: Int = 0
+    var gameAssists: Int = 0
+    var gameRebounds: Int = 0
+    var gameSteals: Int = 0
+    var gameBlocks: Int = 0
     
     var ppg: Double{
         return points/Double(games)
@@ -93,8 +95,9 @@ class Player{
         case veteran = "Veteran"
     }
     
-   
-    
+    static func == (lhs: Player, rhs: Player) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 extension Player{

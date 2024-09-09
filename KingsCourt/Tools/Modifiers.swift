@@ -37,6 +37,7 @@ struct GoButtonModifier: ViewModifier{
         content
             .padding()
             .foregroundStyle(.white)
+            .backgroundStyle(Color.accentColor)
             .frame(maxWidth: .infinity)
             .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
 

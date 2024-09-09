@@ -27,6 +27,8 @@
 		A06EBC612C8C33AC0009B6D8 /* GameHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC602C8C33AC0009B6D8 /* GameHistory.swift */; };
 		A06EBC632C8E07000009B6D8 /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC622C8E07000009B6D8 /* StatsViewModel.swift */; };
 		A06EBC652C8E670C0009B6D8 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */; };
+		A06EBC672C8E84020009B6D8 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC662C8E84020009B6D8 /* GameView.swift */; };
+		A06EBC692C8E84CC0009B6D8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		A06EBC602C8C33AC0009B6D8 /* GameHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistory.swift; sourceTree = "<group>"; };
 		A06EBC622C8E07000009B6D8 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
 		A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		A06EBC662C8E84020009B6D8 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,7 @@
 				A027BF9A2C8C086300AE52E7 /* AddPlayerViewModel.swift */,
 				A06EBC622C8E07000009B6D8 /* StatsViewModel.swift */,
 				A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */,
+				A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */,
 			);
 			path = VIewModels;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				A027BF912C8BB28600AE52E7 /* PlayView.swift */,
+				A06EBC662C8E84020009B6D8 /* GameView.swift */,
 			);
 			path = PlayView;
 			sourceTree = "<group>";
@@ -343,6 +349,7 @@
 				A027BF902C8BB27A00AE52E7 /* GameLogView.swift in Sources */,
 				A06EBC612C8C33AC0009B6D8 /* GameHistory.swift in Sources */,
 				A06EBC652C8E670C0009B6D8 /* PlayerViewModel.swift in Sources */,
+				A06EBC692C8E84CC0009B6D8 /* GameViewModel.swift in Sources */,
 				A027BF8E2C8BB26F00AE52E7 /* StatsView.swift in Sources */,
 				A027BF992C8BEA6700AE52E7 /* Modifiers.swift in Sources */,
 				A027BF922C8BB28600AE52E7 /* PlayView.swift in Sources */,
@@ -350,6 +357,7 @@
 				A027BF5C2C8BAE9900AE52E7 /* KingsCourtApp.swift in Sources */,
 				A027BF962C8BE8CD00AE52E7 /* Player.swift in Sources */,
 				A027BF9B2C8C086300AE52E7 /* AddPlayerViewModel.swift in Sources */,
+				A06EBC672C8E84020009B6D8 /* GameView.swift in Sources */,
 				A027BF8C2C8BB26A00AE52E7 /* AddPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

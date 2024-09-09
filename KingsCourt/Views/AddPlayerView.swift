@@ -52,13 +52,13 @@ struct AddPlayerView: View {
                 }
                 
                 Spacer()
+                Button {
                 
-                Button("Add Player"){
-                    
+                } label: {
+                    Text("Add Player")
+                        .modifier(GoButtonModifier())
+                        .padding(.vertical)
                 }
-                .modifier(GoButtonModifier())
-                .padding(.vertical)
-    
             }
             .padding(.horizontal)
             .navigationTitle("Add Player")

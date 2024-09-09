@@ -77,7 +77,7 @@ struct PlayView: View {
                     Divider()
                         .padding()
                     
-                    NavigationLink(destination: Text("Hello")) {
+                    NavigationLink(destination: GameView()) {
                         Text("Let's Go")
                             .modifier(GoButtonModifier())
                     }
@@ -87,7 +87,7 @@ struct PlayView: View {
                 }
                 .animation(.easeIn(duration: 0.5), value: vm.gameOption)
                 
-            }
+            }.scrollIndicators(.hidden)
             .padding(.horizontal)
             .sheet(isPresented: $vm.showingSheet, content: {
                 sheetPickerView
@@ -130,7 +130,7 @@ struct PlayView: View {
                     }
                 }
                 .padding()
-            }
+            }.scrollIndicators(.hidden)
         }
         .padding()
     }

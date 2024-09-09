@@ -48,32 +48,40 @@ struct StatsView: View {
                     .background(RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 0.5))
                     
                     Spacer()
-                    Menu {
-                        Picker("Sorting Options", selection: $vm.sortOption) {
-                            Text("First Name").tag(0)
-                            Text("Last Name").tag(1)
-                            Text("Assists").tag(2)
-                            Text("Rebounds").tag(3)
-                            Text("Date Created").tag(4)
-                        }
-                    }
-                    label: {
-                        VStack{
-                            Text("Sort")
-                            Text("Type")
-                        }
-                        
-                    }
                     
-                    Button {
-                        vm.sortDescending.toggle()
-                    } label: {
-                        Image(systemName: vm.sortDescending ? "arrow.down" : "arrow.up")
-                    }
-                    .animation(.easeIn, value: vm.sortDescending)
                     
                 }
                 .padding(.horizontal)
+                
+               
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack{
+                        Menu {
+                            Picker("Sorting Options", selection: $vm.sortOption) {
+                                Text("First Name").tag(0)
+                                Text("Last Name").tag(1)
+                                Text("Assists").tag(2)
+                                Text("Rebounds").tag(3)
+                                Text("Date Created").tag(4)
+                            }
+                        }
+                        label: {
+                            VStack{
+                                Text("Sort Type")
+                            }
+                            
+                        }
+                        
+                        Button {
+                            vm.sortDescending.toggle()
+                        } label: {
+                            Image(systemName: vm.sortDescending ? "arrow.down" : "arrow.up")
+                        }
+                        .animation(.easeIn, value: vm.sortDescending)
+                    }
+                }
             }
             
             ScrollView {
