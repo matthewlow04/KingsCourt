@@ -15,7 +15,8 @@ class StatsViewModel: ObservableObject {
 
     var filteredPlayers: [Player] {
         Player.mockPlayers.filter { player in
-            (searchText.isEmpty || player.name.localizedCaseInsensitiveContains(searchText)) &&
+            (searchText.isEmpty || player.firstName.localizedCaseInsensitiveContains(searchText) || player.lastName.localizedCaseInsensitiveContains(searchText)
+            ) &&
             (selectedPositions.isEmpty || selectedPositions.allSatisfy { player.position.contains($0) })
         }
     }
@@ -23,7 +24,9 @@ class StatsViewModel: ObservableObject {
         let players = filteredPlayers
         switch sortOption {
         case 0:
-            return players.sorted { sortDescending ? ($0.name > $1.name) : ($0.name < $1.name)  }
+            return players.sorted { sortDescending ? ($0.firstName > $1.firstName) : ($0.firstName < $1.firstName)  }
+        case 1:
+            return players.sorted { sortDescending ? ($0.lastName > $1.lastName) : ($0.lastName < $1.lastName)  }
         default:
             return players
         }

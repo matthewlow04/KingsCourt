@@ -50,8 +50,8 @@ struct StatsView: View {
                     Spacer()
                     Menu {
                         Picker("Sorting Options", selection: $vm.sortOption) {
-                            Text("Alphabetical").tag(0)
-                            Text("Points").tag(1)
+                            Text("First Name").tag(0)
+                            Text("Last Name").tag(1)
                             Text("Assists").tag(2)
                             Text("Rebounds").tag(3)
                             Text("Date Created").tag(4)
@@ -80,10 +80,10 @@ struct StatsView: View {
                 VStack {
                     ForEach(vm.sortedPlayers) { player in
                         VStack {
-                            NavigationLink(destination: Text("Player Details for \(player.name)")) {
+                            NavigationLink(destination: PlayerView(player: player)){
                                 HStack {
                                     VStack(alignment: .leading) {
-                                        Text(player.name)
+                                        Text(player.firstName + " " + player.lastName)
                                         Text(player.position.map { $0.rawValue }.joined(separator: ", "))
                                             .font(.caption)
                                             .foregroundColor(.gray)

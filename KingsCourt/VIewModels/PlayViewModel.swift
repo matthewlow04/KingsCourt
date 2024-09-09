@@ -30,7 +30,8 @@ class PlayViewModel: ObservableObject {
     var filteredPlayers: [Player] {
         let unavailablePlayers = (currentTeam == .home ? awayTeam : homeTeam).compactMap { $0 }
         return Player.mockPlayers.filter { player in
-            (searchText.isEmpty || player.name.localizedCaseInsensitiveContains(searchText)) &&
+            (searchText.isEmpty || player.firstName.localizedCaseInsensitiveContains(searchText) || player.lastName.localizedCaseInsensitiveContains(searchText))
+            &&
             !unavailablePlayers.contains(where: { $0.id == player.id })
         }
     }

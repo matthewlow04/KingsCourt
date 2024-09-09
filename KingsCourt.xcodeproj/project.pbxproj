@@ -26,6 +26,7 @@
 		A06EBC5F2C8C33420009B6D8 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC5E2C8C33420009B6D8 /* Team.swift */; };
 		A06EBC612C8C33AC0009B6D8 /* GameHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC602C8C33AC0009B6D8 /* GameHistory.swift */; };
 		A06EBC632C8E07000009B6D8 /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC622C8E07000009B6D8 /* StatsViewModel.swift */; };
+		A06EBC652C8E670C0009B6D8 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		A06EBC5E2C8C33420009B6D8 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		A06EBC602C8C33AC0009B6D8 /* GameHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistory.swift; sourceTree = "<group>"; };
 		A06EBC622C8E07000009B6D8 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				A027BF932C8BE84300AE52E7 /* PlayViewModel.swift */,
 				A027BF9A2C8C086300AE52E7 /* AddPlayerViewModel.swift */,
 				A06EBC622C8E07000009B6D8 /* StatsViewModel.swift */,
+				A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */,
 			);
 			path = VIewModels;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				A027BF8A2C8BB26200AE52E7 /* PlayerView.swift in Sources */,
 				A027BF902C8BB27A00AE52E7 /* GameLogView.swift in Sources */,
 				A06EBC612C8C33AC0009B6D8 /* GameHistory.swift in Sources */,
+				A06EBC652C8E670C0009B6D8 /* PlayerViewModel.swift in Sources */,
 				A027BF8E2C8BB26F00AE52E7 /* StatsView.swift in Sources */,
 				A027BF992C8BEA6700AE52E7 /* Modifiers.swift in Sources */,
 				A027BF922C8BB28600AE52E7 /* PlayView.swift in Sources */,
