@@ -6,23 +6,41 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct PlayerView: View {
+    @Environment(\.modelContext) var modelContext
     @StateObject var vm = PlayerViewModel()
     var player: Player
     
     var body: some View {
         VStack {
             ZStack(alignment: .bottomTrailing) {
-                CircleImage(picture: "avatar")
-                Image(systemName: "plus")
-                    .foregroundStyle(.white)
-                    .frame(width: 50, height: 50)
-                    .background(Color.blue)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                    .offset(x: -10, y: 10)
+                if let photo = player.photo, let uiImage = UIImage(data:photo){
+                    Image(uiImage: uiImage)
+                        .modifier(ProfileImageModifier())
+                }else {
+                    CircleImage(picture: "avatar")
+                }
+              
+                PhotosPicker(selection: $vm.selectedPhoto, matching: .images) {
+                    Image(systemName: player.photo != nil ? "arrow.left.arrow.right": "plus")
+                        .foregroundStyle(.white)
+                        .frame(width: 50, height: 50)
+                        .background(Color.blue)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                        .offset(x: -10, y: 10)
+                }
+                .task(id: vm.selectedPhoto) {
+                    if let data = try? await vm.selectedPhoto?.loadTransferable(type: Data.self){
+                        vm.addImage(player: player, data: data)
+                    }
+                }
             }
+        }
+        .onAppear{
+            vm.modelContext = modelContext
         }
         
         VStack(alignment: .leading) {
@@ -101,8 +119,6 @@ struct PlayerView: View {
             }
         }
     }
-    
-    // Helper method to format averages with two decimal places
   
 }
 
@@ -111,12 +127,7 @@ struct CircleImage: View {
     
     var body: some View {
         Image(picture)
-            .resizable()
-            .frame(width: 150, height: 150)
-            .aspectRatio(contentMode: .fit)
-            .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white, lineWidth: 2))
-            .shadow(radius: 10)
+            .modifier(ProfileImageModifier())
     }
 }
 
