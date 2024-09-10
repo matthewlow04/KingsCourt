@@ -64,13 +64,14 @@ struct PickerCapsuleModifier: ViewModifier{
 }
 
 struct ProfileImageModifier: ViewModifier{
+    var size: CGFloat
     func body(content: Content) -> some View {
         content
-            .frame(width: 150, height: 150)
+            .frame(width: size, height: size)
             .aspectRatio(contentMode: .fit)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 2))
-            .shadow(radius: 10)
+
     }
 }
 

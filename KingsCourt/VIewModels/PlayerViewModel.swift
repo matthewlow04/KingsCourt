@@ -13,6 +13,7 @@ import SwiftData
 class PlayerViewModel: ObservableObject{
     @Published var showingTotals = false
     @Published var selectedPhoto: PhotosPickerItem?
+    @Published var showingPhoto = false
     var modelContext: ModelContext? = nil
     
     

@@ -31,6 +31,7 @@
 		A06EBC692C8E84CC0009B6D8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */; };
 		A06EBC6B2C8E9E6C0009B6D8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC6A2C8E9E6C0009B6D8 /* Game.swift */; };
 		A06EBC6D2C8FD59C0009B6D8 /* GameLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC6C2C8FD59C0009B6D8 /* GameLogViewModel.swift */; };
+		A0ACDE0A2C90B94100475F25 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = A0ACDE092C90B94100475F25 /* SwiftUIImageViewer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0ACDE0A2C90B94100475F25 /* SwiftUIImageViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +236,9 @@
 			dependencies = (
 			);
 			name = KingsCourt;
+			packageProductDependencies = (
+				A0ACDE092C90B94100475F25 /* SwiftUIImageViewer */,
+			);
 			productName = KingsCourt;
 			productReference = A027BF582C8BAE9900AE52E7 /* KingsCourt.app */;
 			productType = "com.apple.product-type.application";
@@ -306,6 +311,9 @@
 				Base,
 			);
 			mainGroup = A027BF4F2C8BAE9900AE52E7;
+			packageReferences = (
+				A0ACDE082C90B94100475F25 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
+			);
 			productRefGroup = A027BF592C8BAE9900AE52E7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -696,6 +704,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A0ACDE082C90B94100475F25 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A0ACDE092C90B94100475F25 /* SwiftUIImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0ACDE082C90B94100475F25 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = SwiftUIImageViewer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A027BF502C8BAE9900AE52E7 /* Project object */;
 }

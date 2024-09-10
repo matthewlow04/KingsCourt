@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import SwiftUIImageViewer
 
 struct PlayerView: View {
     @Environment(\.modelContext) var modelContext
@@ -19,9 +20,14 @@ struct PlayerView: View {
                 if let photo = player.photo, let uiImage = UIImage(data:photo){
                     Image(uiImage: uiImage)
                         .resizable()
-                        .modifier(ProfileImageModifier())
+                        .modifier(ProfileImageModifier(size: 150))
+                        .shadow(radius: 10)
+                        .onTapGesture {
+                            vm.showingPhoto = true
+                        }
                 }else {
-                    CircleImage(picture: "avatar")
+                    CircleImage(picture: "avatar", size: 150)
+                        .shadow(radius: 10)
                 }
               
                 PhotosPicker(selection: $vm.selectedPhoto, matching: .images) {
@@ -43,6 +49,14 @@ struct PlayerView: View {
         .onAppear{
             vm.modelContext = modelContext
         }
+        .fullScreenCover(isPresented: $vm.showingPhoto, content: {
+            if let photo = player.photo, let uiImage = UIImage(data:photo){
+                SwiftUIImageViewer(image: Image(uiImage: uiImage))
+                    .overlay(alignment: .topTrailing) {
+                        closeButton
+                    }
+            }
+        })
         
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
@@ -120,16 +134,30 @@ struct PlayerView: View {
             }
         }
     }
+    
+    private var closeButton: some View {
+       Button {
+           vm.showingPhoto = false
+       } label: {
+           Image(systemName: "xmark")
+               .font(.headline)
+       }
+       .buttonStyle(.bordered)
+       .clipShape(Circle())
+       .tint(Color.accentColor)
+       .padding()
+   }
   
 }
 
 struct CircleImage: View {
     var picture: String
+    var size: CGFloat
     
     var body: some View {
         Image(picture)
             .resizable()
-            .modifier(ProfileImageModifier())
+            .modifier(ProfileImageModifier(size: size))
     }
 }
 

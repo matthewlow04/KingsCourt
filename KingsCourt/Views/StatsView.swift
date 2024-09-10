@@ -95,6 +95,13 @@ struct StatsView: View {
                         VStack {
                             NavigationLink(destination: PlayerView(player: player)){
                                 HStack {
+                                    if let photo = player.photo, let uiImage = UIImage(data:photo){
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .modifier(ProfileImageModifier(size: 50))
+                                    }else {
+                                        CircleImage(picture: "avatar", size: 50)
+                                    }
                                     VStack(alignment: .leading) {
                                         Text(player.firstName + " " + player.lastName)
                                         Text(player.position.map { $0.rawValue }.joined(separator: ", "))

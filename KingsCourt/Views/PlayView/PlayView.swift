@@ -120,6 +120,13 @@ struct PlayView: View {
                                 vm.togglePlayerSelection(player)
                             }) {
                                 HStack {
+                                    if let photo = player.photo, let uiImage = UIImage(data:photo){
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .modifier(ProfileImageModifier(size: 50))
+                                    }else {
+                                        CircleImage(picture: "avatar", size: 50)
+                                    }
                                     Text(player.firstName + " " + player.lastName)
                                     Spacer()
                                     Text(player.position.map { $0.rawValue }.joined(separator: ", "))
