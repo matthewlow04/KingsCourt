@@ -12,6 +12,8 @@ class GameViewModel: ObservableObject {
     @Published var isAdding: Bool = true
     @Published var homeTeam: Team? = nil
     @Published var awayTeam: Team? = nil
+    @Published var showingAlert = false
+    var alertMessage = ""
     var modelContext: ModelContext? = nil
     
     func finishGame(){
@@ -46,7 +48,60 @@ class GameViewModel: ObservableObject {
             date: Date.now
         )
         
+        for player in allPlayers{
+            player.points += Double(player.gamePoints)
+            player.assists += Double(player.gameAssists)
+            player.rebounds += Double(player.gameRebounds)
+            player.blocks += Double(player.gameBlocks)
+            player.steals += Double(player.gameSteals)
+            player.games += 1
+            
+            if player.id == overallMVP.id{
+                player.mvps += 1
+            }
+        }
+        
+        for player in homeTeam.players{
+            if isHomeTeamWinner{
+                player.wins += 1
+            } else {
+                player.losses += 1
+            }
+        }
+        
+        for player in awayTeam.players{
+            if isHomeTeamWinner{
+                player.losses += 1
+            } else {
+                player.wins += 1
+            }
+        }
+        
         modelContext?.insert(gameHistory)
+        clearStats()
+    }
+    
+    func clearStats(){
+        guard let homeTeam = homeTeam, let awayTeam = awayTeam else {
+            return
+        }
+        for player in awayTeam.players{
+            player.gamePoints = 0
+            player.gameAssists = 0
+            player.gameBlocks = 0
+            player.gameRebounds = 0
+            player.gameSteals = 0
+        }
+        for player in homeTeam.players{
+            player.gamePoints = 0
+            player.gameAssists = 0
+            player.gameBlocks = 0
+            player.gameRebounds = 0
+            player.gameSteals = 0
+        }
+        
+        awayTeam.points = 0
+        homeTeam.points = 0
     }
     
 }

@@ -28,6 +28,7 @@ class Player: ObservableObject, Identifiable, Equatable{
     var gameRebounds: Int = 0
     var gameSteals: Int = 0
     var gameBlocks: Int = 0
+    var mvps: Int = 0
     
     var ppg: Double{
         return points/Double(games)

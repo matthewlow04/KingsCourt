@@ -56,6 +56,8 @@ struct GameView: View {
             
             Button(action: {
                 vm.finishGame()
+                vm.alertMessage = "GG!"
+                vm.showingAlert = true
             }, label: {
                 Text("Finish")
                     .modifier(GoButtonModifier())
@@ -64,6 +66,13 @@ struct GameView: View {
         }
         .padding()
         .navigationTitle("King's Court")
+        .alert(isPresented: $vm.showingAlert){
+            Alert(
+                title: Text("GAME OVER"),
+                message: Text(vm.alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
@@ -78,7 +87,11 @@ struct GameView: View {
                 vm.modelContext = modelContext
                 vm.homeTeam = homeTeam
                 vm.awayTeam = awayTeam
+                vm.clearStats()
             }
+        }
+        .onDisappear{
+            vm.clearStats()
         }
     }
 }

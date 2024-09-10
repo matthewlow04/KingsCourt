@@ -89,8 +89,10 @@ struct PlayerView: View {
                 Section{
                     HStack{
                         Text("\(player.wins) wins")
+                            .foregroundStyle(Color.green)
                         Spacer()
                         Text("\(player.losses) losses")
+                            .foregroundStyle(Color.red)
                     }
                 }
             }
