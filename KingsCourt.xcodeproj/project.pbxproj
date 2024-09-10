@@ -30,6 +30,7 @@
 		A06EBC672C8E84020009B6D8 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC662C8E84020009B6D8 /* GameView.swift */; };
 		A06EBC692C8E84CC0009B6D8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */; };
 		A06EBC6B2C8E9E6C0009B6D8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC6A2C8E9E6C0009B6D8 /* Game.swift */; };
+		A06EBC6D2C8FD59C0009B6D8 /* GameLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EBC6C2C8FD59C0009B6D8 /* GameLogViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		A06EBC662C8E84020009B6D8 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		A06EBC6A2C8E9E6C0009B6D8 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		A06EBC6C2C8FD59C0009B6D8 /* GameLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				A06EBC622C8E07000009B6D8 /* StatsViewModel.swift */,
 				A06EBC642C8E670C0009B6D8 /* PlayerViewModel.swift */,
 				A06EBC682C8E84CC0009B6D8 /* GameViewModel.swift */,
+				A06EBC6C2C8FD59C0009B6D8 /* GameLogViewModel.swift */,
 			);
 			path = VIewModels;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				A027BF8A2C8BB26200AE52E7 /* PlayerView.swift in Sources */,
 				A027BF902C8BB27A00AE52E7 /* GameLogView.swift in Sources */,
 				A06EBC612C8C33AC0009B6D8 /* GameHistory.swift in Sources */,
+				A06EBC6D2C8FD59C0009B6D8 /* GameLogViewModel.swift in Sources */,
 				A06EBC652C8E670C0009B6D8 /* PlayerViewModel.swift in Sources */,
 				A06EBC692C8E84CC0009B6D8 /* GameViewModel.swift in Sources */,
 				A027BF8E2C8BB26F00AE52E7 /* StatsView.swift in Sources */,

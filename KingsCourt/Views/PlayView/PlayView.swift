@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PlayView: View {
     
     @StateObject var vm = PlayViewModel()
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         NavigationStack {
@@ -95,6 +97,10 @@ struct PlayView: View {
                 sheetPickerView
             })
             .navigationTitle("Set Up")
+            .onAppear{
+                vm.modelContext = modelContext
+                vm.fetchPlayers()
+            }
         }
     }
     

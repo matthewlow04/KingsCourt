@@ -8,6 +8,7 @@ import SwiftUI
 
 struct StatsView: View {
     @StateObject var vm = StatsViewModel()
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         NavigationStack {
@@ -54,6 +55,10 @@ struct StatsView: View {
                 .padding(.horizontal)
                 
                
+            }
+            .onAppear{
+                vm.modelContext = modelContext
+                vm.fetchPlayers()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

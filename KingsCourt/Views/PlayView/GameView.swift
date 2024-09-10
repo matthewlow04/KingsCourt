@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct GameView: View {
-    @ObservedObject var vm = GameViewModel()
-    @ObservedObject var homeTeam: Team
-    @ObservedObject var awayTeam: Team
+    @StateObject var vm = GameViewModel()
+    @Environment(\.modelContext) var modelContext
+    @StateObject var homeTeam: Team
+    @StateObject var awayTeam: Team
     
     var body: some View {
         VStack {
@@ -22,6 +24,7 @@ struct GameView: View {
                     }
                 }
                 .font(.subheadline)
+              
             }
             .scrollIndicators(.hidden)
             
@@ -40,7 +43,7 @@ struct GameView: View {
                 }
             }
             .font(.headline)
-            
+        
             ScrollView {
                 VStack(spacing: 10) {
                     ForEach(awayTeam.players, id: \.id) { player in
@@ -52,35 +55,7 @@ struct GameView: View {
             .scrollIndicators(.hidden)
             
             Button(action: {
-                let allPlayers = homeTeam.players + awayTeam.players
-                guard let overallMVP = allPlayers.max(by: { $0.gamePoints < $1.gamePoints }) else {
-                    return
-                }
-                
-                let homePlayers = homeTeam.players.map { player in
-                    GameHistoryPlayer(
-                        player: player,
-                        points: player.gamePoints,
-                        mvp: player.id == overallMVP.id
-                    )
-                }
-                
-                let awayPlayers = awayTeam.players.map { player in
-                    GameHistoryPlayer(
-                        player: player,
-                        points: player.gamePoints,
-                        mvp: player.id == overallMVP.id
-                    )
-                }
-                let isHomeTeamWinner = homeTeam.points > awayTeam.points
-                
-                let gameHistory = GameHistory(
-                    awayTeam: GameHistoryTeam(players: awayPlayers, points: awayTeam.points, winner: !isHomeTeamWinner),
-                    homeTeam: GameHistoryTeam(players: homePlayers, points: homeTeam.points, winner: isHomeTeamWinner),
-                    date: Date.now
-                )
-                
-                dump(gameHistory)
+                vm.finishGame()
             }, label: {
                 Text("Finish")
                     .modifier(GoButtonModifier())
@@ -98,15 +73,22 @@ struct GameView: View {
                 }
             }
         }
+        .onAppear{
+            if vm.homeTeam == nil && vm.awayTeam == nil {
+                vm.modelContext = modelContext
+                vm.homeTeam = homeTeam
+                vm.awayTeam = awayTeam
+            }
+        }
     }
 }
 
 
 
 struct PlayerScoreView: View {
-    @ObservedObject var player: Player
-    @ObservedObject var team: Team
-    @ObservedObject var vm: GameViewModel
+    @StateObject var player: Player
+    @StateObject var team: Team
+    @StateObject var vm: GameViewModel
     
     var body: some View {
         HStack(spacing: 25) {

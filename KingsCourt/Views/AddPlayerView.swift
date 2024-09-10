@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddPlayerView: View {
     @StateObject var vm = AddPlayerViewModel()
+    @Environment(\.modelContext) var modelContext
+    
     
     var body: some View {
         NavigationStack {
@@ -53,7 +55,7 @@ struct AddPlayerView: View {
                 
                 Spacer()
                 Button {
-                
+                    vm.addPlayer()
                 } label: {
                     Text("Add Player")
                         .modifier(GoButtonModifier())
@@ -62,6 +64,9 @@ struct AddPlayerView: View {
             }
             .padding(.horizontal)
             .navigationTitle("Add Player")
+            .onAppear{
+                vm.modelContext = modelContext
+            }
         }
     }
 }

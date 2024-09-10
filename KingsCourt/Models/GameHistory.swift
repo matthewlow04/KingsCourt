@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import SwiftData
 
-class GameHistory{
+
+@Model
+class GameHistory: Identifiable{
     var awayTeam: GameHistoryTeam
     var homeTeam: GameHistoryTeam
     var date: Date
@@ -22,14 +25,28 @@ class GameHistory{
 
 }
 
-struct GameHistoryPlayer{
+@Model
+class GameHistoryPlayer{
     var player: Player
     var points: Int
     var mvp: Bool
+    
+    init(player: Player, points: Int, mvp: Bool) {
+        self.player = player
+        self.points = points
+        self.mvp = mvp
+    }
 }
 
-struct GameHistoryTeam{
+@Model
+class GameHistoryTeam{
     var players: [GameHistoryPlayer]
     var points: Int
     var winner: Bool
+    
+    init(players: [GameHistoryPlayer], points: Int, winner: Bool) {
+        self.players = players
+        self.points = points
+        self.winner = winner
+    }
 }

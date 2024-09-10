@@ -6,15 +6,18 @@
 //
 
 import Foundation
+import SwiftData
 
 class StatsViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var selectedPositions: [Player.Position] = []
     @Published var sortOption = 0
     @Published var sortDescending = true
+    @Published var players: [Player] = []
+    var modelContext: ModelContext? = nil
 
     var filteredPlayers: [Player] {
-        Player.mockPlayers.filter { player in
+        players.filter { player in
             (searchText.isEmpty || player.firstName.localizedCaseInsensitiveContains(searchText) || player.lastName.localizedCaseInsensitiveContains(searchText)
             ) &&
             (selectedPositions.isEmpty || selectedPositions.allSatisfy { player.position.contains($0) })
@@ -31,5 +34,13 @@ class StatsViewModel: ObservableObject {
             return players
         }
 
+    }
+    
+    func fetchPlayers(){
+        let fetchDescriptor = FetchDescriptor<Player> (
+            sortBy: [SortDescriptor(\.firstName)]
+        )
+        
+        players = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
     }
 }

@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 class PlayViewModel: ObservableObject {
+    var modelContext: ModelContext? = nil
+    @Published var players: [Player] = []
     @Published var showingSheet = false
     @Published var homeTeam: [Player?] = [nil]
     @Published var awayTeam: [Player?] = [nil]
@@ -29,7 +32,7 @@ class PlayViewModel: ObservableObject {
     
     var filteredPlayers: [Player] {
         let unavailablePlayers = (currentTeam == .home ? awayTeam : homeTeam).compactMap { $0 }
-        return Player.mockPlayers.filter { player in
+        return players.filter { player in
             (searchText.isEmpty || player.firstName.localizedCaseInsensitiveContains(searchText) || player.lastName.localizedCaseInsensitiveContains(searchText))
             &&
             !unavailablePlayers.contains(where: { $0.id == player.id })
@@ -79,6 +82,14 @@ class PlayViewModel: ObservableObject {
     
     private func compactTeam(_ team: inout [Player?]) {
         team = team.compactMap { $0 } + Array(repeating: nil, count: gameOption - team.compactMap { $0 }.count)
+    }
+    
+    func fetchPlayers(){
+        let fetchDescriptor = FetchDescriptor<Player> (
+            sortBy: [SortDescriptor(\.firstName)]
+        )
+        
+        players = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
     }
     
 }
