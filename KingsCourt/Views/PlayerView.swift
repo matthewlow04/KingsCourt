@@ -18,6 +18,7 @@ struct PlayerView: View {
             ZStack(alignment: .bottomTrailing) {
                 if let photo = player.photo, let uiImage = UIImage(data:photo){
                     Image(uiImage: uiImage)
+                        .resizable()
                         .modifier(ProfileImageModifier())
                 }else {
                     CircleImage(picture: "avatar")
@@ -127,6 +128,7 @@ struct CircleImage: View {
     
     var body: some View {
         Image(picture)
+            .resizable()
             .modifier(ProfileImageModifier())
     }
 }

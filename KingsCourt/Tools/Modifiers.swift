@@ -66,7 +66,6 @@ struct PickerCapsuleModifier: ViewModifier{
 struct ProfileImageModifier: ViewModifier{
     func body(content: Content) -> some View {
         content
-            .resizable()
             .frame(width: 150, height: 150)
             .aspectRatio(contentMode: .fit)
             .clipShape(Circle())
