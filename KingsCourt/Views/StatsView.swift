@@ -99,7 +99,7 @@ struct StatsView: View {
                                         Text(player.firstName + " " + player.lastName)
                                         Text(player.position.map { $0.rawValue }.joined(separator: ", "))
                                             .font(.caption)
-                                            .foregroundColor(.gray)
+                                            .foregroundStyle(.gray)
                                     }
                                     Spacer()
                                 }

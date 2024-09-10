@@ -10,84 +10,87 @@ import SwiftUI
 struct PlayerView: View {
     @StateObject var vm = PlayerViewModel()
     var player: Player
+    
     var body: some View {
-        VStack{
-            ZStack(alignment: .bottomTrailing){
+        VStack {
+            ZStack(alignment: .bottomTrailing) {
                 CircleImage(picture: "avatar")
                 Image(systemName: "plus")
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .frame(width: 50, height: 50)
                     .background(Color.blue)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 2))
                     .offset(x: -10, y: 10)
             }
-           
         }
-        VStack(alignment: .leading){
-            VStack(alignment: .leading){
-                HStack(alignment: .center){
-                    VStack(alignment: .leading){
+        
+        VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                HStack(alignment: .center) {
+                    VStack(alignment: .leading) {
                         Text(player.firstName + " " + player.lastName)
                             .font(.largeTitle)
                         Text(player.position.map { $0.rawValue }.joined(separator: " "))
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundStyle(.gray)
                     }
                     Spacer()
-                    VStack(alignment: .trailing){
+                    VStack(alignment: .trailing) {
                         Text(player.title)
+                            .foregroundStyle(.gray)
                         Text(player.games == 1 ? "\(player.games) game played" : "\(player.games) games played")
+                            .foregroundStyle(.gray)
+                        Text("MVPS: \(player.mvps)")
+                            .foregroundStyle(Color.accentColor)
                     }
                     .font(.caption)
-                    .foregroundColor(.gray)
+                  
                 }
             }
             .padding()
            
-            Form{
-                Section{
-                    List{
-                        Section{
-                            HStack{
+            Form {
+                Section {
+                    List {
+                        Section {
+                            HStack {
                                 Text("Points")
                                 Spacer()
-                                Text(vm.showingTotals ? "\(player.points) points" : "\(player.ppg) ppg")
+                                Text(vm.showingTotals ? "\(player.points)" : vm.formattedStat(player.ppg))
                             }
-                            HStack{
+                            HStack {
                                 Text("Assists")
                                 Spacer()
-                                Text(vm.showingTotals ? "\(player.assists) assists" : "\(player.apg) apg")
+                                Text(vm.showingTotals ? "\(player.assists)" : vm.formattedStat(player.apg))
                             }
-                            HStack{
+                            HStack {
                                 Text("Rebounds")
                                 Spacer()
-                                Text(vm.showingTotals ? "\(player.rebounds) rebounds" : "\(player.rpg) rpg")
+                                Text(vm.showingTotals ? "\(player.rebounds)" : vm.formattedStat(player.rpg))
                             }
-                            HStack{
+                            HStack {
                                 Text("Steals")
                                 Spacer()
-                                Text(vm.showingTotals ? "\(player.steals) steals" : "\(player.spg) spg")
+                                Text(vm.showingTotals ? "\(player.steals)" : vm.formattedStat(player.spg))
                             }
-                            HStack{
+                            HStack {
                                 Text("Blocks")
                                 Spacer()
-                                Text(vm.showingTotals ? "\(player.blocks) blocks" : "\(player.bpg) bpg")
+                                Text(vm.showingTotals ? "\(player.blocks)" : vm.formattedStat(player.bpg))
                             }
-
-
                         }
                     }
                 } header: {
-                    HStack{
+                    HStack {
                         Text(vm.showingTotals ? "Totals" : "Averages")
                         Spacer()
-                        Toggle(isOn: $vm.showingTotals){}
+                        Toggle(isOn: $vm.showingTotals) {}
                             .toggleStyle(.switch)
                     }
                 }
-                Section{
-                    HStack{
+                Section {
+                    HStack {
                         Text("\(player.wins) wins")
                             .foregroundStyle(Color.green)
                         Spacer()
@@ -98,24 +101,24 @@ struct PlayerView: View {
             }
         }
     }
+    
+    // Helper method to format averages with two decimal places
+  
 }
 
 struct CircleImage: View {
     var picture: String
+    
     var body: some View {
-          Image(picture)
+        Image(picture)
             .resizable()
             .frame(width: 150, height: 150)
-                .aspectRatio(contentMode: .fit)
-                     .clipShape(Circle())
-                     .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                     .shadow(radius: 10)
+            .aspectRatio(contentMode: .fit)
+            .clipShape(Circle())
+            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+            .shadow(radius: 10)
     }
 }
-
-
-
-
 
 #Preview {
     PlayerView(player: Player(id: UUID(), firstName: "Matthew", lastName: "Low", notes: "", position: [.PG, .SG]))

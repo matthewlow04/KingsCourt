@@ -124,10 +124,10 @@ struct PlayView: View {
                                     Spacer()
                                     Text(player.position.map { $0.rawValue }.joined(separator: ", "))
                                         .font(.caption)
-                                        .foregroundColor(.gray)
+                                        .foregroundStyle(.gray)
                                     if vm.isPlayerSelected(player) {
                                         Image(systemName: "checkmark")
-                                            .foregroundColor(.blue)
+                                            .foregroundStyle(.blue)
                                     }
                                 }
                                 .padding()

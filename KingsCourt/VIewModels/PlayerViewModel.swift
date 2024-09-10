@@ -9,4 +9,8 @@ import Foundation
 
 class PlayerViewModel: ObservableObject{
     @Published var showingTotals = false
+    
+    func formattedStat(_ stat: Double) -> String {
+        String(format: "%.2f", stat)
+    }
 }
