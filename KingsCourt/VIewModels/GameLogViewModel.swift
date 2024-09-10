@@ -15,7 +15,7 @@ class GameLogViewModel: ObservableObject {
     
     func fetchGameLog(){
         let fetchDescriptor = FetchDescriptor<GameHistory> (
-            sortBy: [SortDescriptor(\.date)]
+            sortBy: [SortDescriptor(\.date ,order: .reverse)]
         )
         
         gameHistories = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []

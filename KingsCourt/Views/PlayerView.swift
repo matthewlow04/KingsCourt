@@ -11,6 +11,7 @@ import SwiftUIImageViewer
 
 struct PlayerView: View {
     @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm = PlayerViewModel()
     var player: Player
     
@@ -131,8 +132,28 @@ struct PlayerView: View {
                             .foregroundStyle(Color.red)
                     }
                 }
+                Button {
+                    vm.showingDeleteConfirm = true
+                } label: {
+                    Text("Delete Player")
+                        .modifier(GoButtonModifier())
+                        .foregroundStyle(.red)
+                }
+                .listRowBackground(Color.clear)
             }
+            .confirmationDialog("Delete Player", isPresented: $vm.showingDeleteConfirm) {
+                
+                Button("Delete", role: .destructive){
+                    vm.deletePlayer(player: player)
+                    dismiss()
+                }
+        
+                Button("Cancel", role: .cancel) { }
+            }
+            
+
         }
+       
     }
     
     private var closeButton: some View {

@@ -14,6 +14,7 @@ class PlayerViewModel: ObservableObject{
     @Published var showingTotals = false
     @Published var selectedPhoto: PhotosPickerItem?
     @Published var showingPhoto = false
+    @Published var showingDeleteConfirm = false
     var modelContext: ModelContext? = nil
     
     
@@ -23,5 +24,9 @@ class PlayerViewModel: ObservableObject{
     
     func addImage(player: Player, data: Data){
         player.photo = data
+    }
+    
+    func deletePlayer(player: Player){
+        modelContext?.delete(player)
     }
 }
