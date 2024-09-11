@@ -113,6 +113,12 @@ struct PlayerView: View {
                                 Spacer()
                                 Text(vm.showingTotals ? "\(player.blocks)" : vm.formattedStat(player.bpg))
                             }
+                            
+                            HStack {
+                                Text("+/-")
+                                Spacer()
+                                Text(vm.showingTotals ? "\(player.plusMinus)" : vm.formattedStat(player.pmpg))
+                            }
                         }
                     }
                 } header: {
@@ -124,13 +130,25 @@ struct PlayerView: View {
                     }
                 }
                 Section {
-                    HStack {
-                        Text("\(player.wins) wins")
-                            .foregroundStyle(Color.green)
-                        Spacer()
-                        Text("\(player.losses) losses")
-                            .foregroundStyle(Color.red)
+                    VStack{
+                        HStack{
+                            Text("Streak: \(player.streak)")
+                            if player.streak != 0{
+                                Image(systemName: player.streak > 0 ? "flame" : "snowflake")
+                                    .foregroundStyle(player.streak > 0 ? .red : .blue)
+                            }
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Text("\(player.wins) wins")
+                                .foregroundStyle(Color.green)
+                            Spacer()
+                            Text("\(player.losses) losses")
+                                .foregroundStyle(Color.red)
+                        }
                     }
+                  
                 }
                 Button {
                     vm.showingDeleteConfirm = true

@@ -27,6 +27,29 @@ class PlayerViewModel: ObservableObject{
     }
     
     func deletePlayer(player: Player){
+        
+        let fetchDescriptor = FetchDescriptor<GameHistory>(
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
+        )
+        
+        let gameHistories = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
+        
+        let deletedPlayer = Player(id: UUID(), firstName: "Deleted", lastName: "Player", position: [])
+        
+        for gameHistory in gameHistories {
+            for historyPlayer in gameHistory.awayTeam.players {
+                if historyPlayer.player == player {
+                    historyPlayer.player = deletedPlayer
+                }
+            }
+            for historyPlayer in gameHistory.homeTeam.players {
+                if historyPlayer.player == player {
+                    historyPlayer.player = deletedPlayer
+                }
+            }
+        }
+        
         modelContext?.delete(player)
     }
+    
 }

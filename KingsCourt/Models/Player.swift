@@ -15,11 +15,11 @@ class Player: ObservableObject, Identifiable, Equatable{
     var lastName: String
     var notes: String?
     var position: [Position]
-    var points: Double = 0
-    var assists: Double = 0
-    var rebounds: Double = 0
-    var steals: Double = 0
-    var blocks: Double = 0
+    var points: Int = 0
+    var assists: Int = 0
+    var rebounds: Int = 0
+    var steals: Int = 0
+    var blocks: Int = 0
     var games: Int = 0
     var wins: Int = 0
     var losses: Int = 0
@@ -30,25 +30,31 @@ class Player: ObservableObject, Identifiable, Equatable{
     var gameBlocks: Int = 0
     var mvps: Int = 0
     var photo: Data?
+    var streak: Int = 0
+    var plusMinus: Int = 0
     
     var ppg: Double{
-        return points/Double(games)
+        return Double(points)/Double(games)
     }
     
     var apg: Double{
-        return assists/Double(games)
+        return Double(assists)/Double(games)
     }
     
     var rpg: Double{
-        return rebounds/Double(games)
+        return Double(rebounds)/Double(games)
     }
     
     var spg: Double{
-        return steals/Double(games)
+        return Double(steals)/Double(games)
     }
     
     var bpg: Double{
-        return blocks/Double(games)
+        return Double(blocks)/Double(games)
+    }
+    
+    var pmpg: Double{
+        return Double(plusMinus)/Double(games)
     }
     
     var title: String{

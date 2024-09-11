@@ -50,11 +50,11 @@ class GameViewModel: ObservableObject {
         )
         
         for player in allPlayers{
-            player.points += Double(player.gamePoints)
-            player.assists += Double(player.gameAssists)
-            player.rebounds += Double(player.gameRebounds)
-            player.blocks += Double(player.gameBlocks)
-            player.steals += Double(player.gameSteals)
+            player.points += player.gamePoints
+            player.assists += player.gameAssists
+            player.rebounds += player.gameRebounds
+            player.blocks += player.gameBlocks
+            player.steals += player.gameSteals
             player.games += 1
             
             if player.id == overallMVP.id{
@@ -63,18 +63,40 @@ class GameViewModel: ObservableObject {
         }
         
         for player in homeTeam.players{
+            player.plusMinus += (homeTeam.points - awayTeam.points)
             if isHomeTeamWinner{
                 player.wins += 1
+                if player.streak > 0{
+                    player.streak += 1
+                } else {
+                    player.streak = 1
+                }
             } else {
                 player.losses += 1
+                if player.streak < 0 {
+                    player.streak -= 1
+                } else {
+                    player.streak = -1
+                }
             }
         }
         
         for player in awayTeam.players{
+            player.plusMinus += (awayTeam.points - homeTeam.points)
             if isHomeTeamWinner{
                 player.losses += 1
+                if player.streak < 0 {
+                    player.streak -= 1
+                } else {
+                    player.streak = -1
+                }
             } else {
                 player.wins += 1
+                if player.streak > 0{
+                    player.streak += 1
+                } else {
+                    player.streak = 1
+                }
             }
         }
         

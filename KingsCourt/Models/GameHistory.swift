@@ -26,6 +26,19 @@ class GameHistory: Identifiable{
 }
 
 @Model
+class GameHistoryTeam{
+    var players: [GameHistoryPlayer]
+    var points: Int
+    var winner: Bool
+    
+    init(players: [GameHistoryPlayer], points: Int, winner: Bool) {
+        self.players = players
+        self.points = points
+        self.winner = winner
+    }
+}
+
+@Model
 class GameHistoryPlayer{
     var player: Player
     var points: Int
@@ -38,15 +51,4 @@ class GameHistoryPlayer{
     }
 }
 
-@Model
-class GameHistoryTeam{
-    var players: [GameHistoryPlayer]
-    var points: Int
-    var winner: Bool
-    
-    init(players: [GameHistoryPlayer], points: Int, winner: Bool) {
-        self.players = players
-        self.points = points
-        self.winner = winner
-    }
-}
+
