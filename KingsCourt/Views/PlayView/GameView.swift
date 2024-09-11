@@ -11,6 +11,7 @@ import SwiftData
 struct GameView: View {
     @StateObject var vm = GameViewModel()
     @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     @StateObject var homeTeam: Team
     @StateObject var awayTeam: Team
     
@@ -70,7 +71,9 @@ struct GameView: View {
             Alert(
                 title: Text("GAME OVER"),
                 message: Text(vm.alertMessage),
-                dismissButton: .default(Text("OK"))
+                dismissButton: .default(Text("OK")){
+                    dismiss()
+                }
             )
         }
         .toolbar {

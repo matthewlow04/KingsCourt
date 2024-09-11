@@ -16,17 +16,28 @@ struct AddPlayerView: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 20) {
                 Group{
-                    Text("First Name")
+                    HStack(spacing: 2){
+                        Text("First Name")
+                        Text(vm.firstName.isEmpty ? "*" : "")
+                            .foregroundStyle(.red)
+                    }
+                    
                     TextField("First Name", text: $vm.firstName)
                         .modifier(FormTextfieldModifier())
                         .padding(.horizontal, 2)
+                        .autocorrectionDisabled()
                 }
                
                 Group{
-                    Text("Last Name")
+                    HStack(spacing: 2){
+                        Text("Last Name")
+                        Text(vm.lastName.isEmpty ? "*" : "")
+                            .foregroundStyle(.red)
+                    }
                     TextField("Last Name", text: $vm.lastName)
                         .modifier(FormTextfieldModifier())
                         .padding(.horizontal, 2)
+                        .autocorrectionDisabled()
                 }
                 Group{
                     Text("Notes")
@@ -35,7 +46,11 @@ struct AddPlayerView: View {
                         .padding(.horizontal, 2)
                 }
                 Group{
-                    Text("Positions")
+                    HStack(spacing: 2){
+                        Text("Positions")
+                        Text(vm.positions.isEmpty ? "*" : "")
+                            .foregroundStyle(.red)
+                    }
                     HStack{
                         Spacer()
                         HStack {
@@ -64,8 +79,18 @@ struct AddPlayerView: View {
             }
             .padding(.horizontal)
             .navigationTitle("Add Player")
+            .alert(isPresented: $vm.showingAlert){
+                Alert(
+                    title: Text("Success"),
+                    message: Text(vm.alertMessage),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
             .onAppear{
                 vm.modelContext = modelContext
+            }
+            .onDisappear{
+                vm.clearFields()
             }
         }
     }
