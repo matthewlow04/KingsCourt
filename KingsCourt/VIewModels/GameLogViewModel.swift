@@ -10,18 +10,28 @@ import SwiftData
 
 class GameLogViewModel: ObservableObject {
     @Published var gameHistories: [GameHistory] = []
+    @Published var selectedDate: Date? = nil
+    @Published var showingDatePicker = false
     var modelContext: ModelContext? = nil
     
-    
-    func fetchGameLog(){
+    func fetchGameLog() {
         let fetchDescriptor = FetchDescriptor<GameHistory> (
             sortBy: [SortDescriptor(\.date ,order: .reverse)]
         )
         
-        gameHistories = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
+        var fetchedGames = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
+        
+        if let selectedDate = selectedDate {
+            let calendar = Calendar.current
+            fetchedGames = fetchedGames.filter { gameHistory in
+                calendar.isDate(gameHistory.date, inSameDayAs: selectedDate)
+            }
+        }
+        
+        gameHistories = fetchedGames
     }
     
-    func checkDeletedPlayer(player: GameHistoryPlayer) -> Bool{
+    func checkDeletedPlayer(player: GameHistoryPlayer) -> Bool {
         return (player.player.firstName == "Deleted" && player.player.lastName == "Player")
     }
 }

@@ -8,16 +8,14 @@
 import SwiftUI
 import SwiftData
 
-import SwiftUI
-import SwiftData
-
 struct GameLogView: View {
     @Environment(\.modelContext) var modelContext
     @StateObject var vm = GameLogViewModel()
-    
+   
+
     var body: some View {
         NavigationStack {
-            VStack{
+            VStack {
                 if vm.gameHistories.isEmpty {
                     Text("No Past Games")
                         .italic()
@@ -30,6 +28,45 @@ struct GameLogView: View {
                 }
             }
             .navigationTitle("Game History")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        vm.showingDatePicker.toggle()
+                    } label: {
+                        Image(systemName: "calendar")
+                    }
+                }
+            }
+            .sheet(isPresented: $vm.showingDatePicker) {
+                VStack {
+                    DatePicker("Select Date", selection: Binding(
+                        get: { vm.selectedDate ?? Date() },
+                        set: { vm.selectedDate = $0 }
+                    ), displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                        .padding()
+                     
+                    Button {
+                        vm.selectedDate = nil
+                        vm.showingDatePicker = false
+                        vm.fetchGameLog()
+                    } label: {
+                        Text("Show All Dates")
+                            .modifier(GoButtonModifier())
+                            .padding()
+                    }
+                    
+                    Button {
+                        vm.showingDatePicker = false
+                        vm.fetchGameLog()
+                    } label: {
+                        Text("Done")
+                            .modifier(GoButtonModifier())
+                            .padding()
+                    }
+
+                }
+            }
             .onAppear {
                 vm.modelContext = modelContext
                 vm.fetchGameLog()
@@ -77,7 +114,7 @@ struct GameLogView: View {
             
             ForEach(team.players, id: \.player.id) { gamePlayer in
                 HStack {
-                    if vm.checkDeletedPlayer(player: gamePlayer){
+                    if vm.checkDeletedPlayer(player: gamePlayer) {
                         Text("Deleted Player")
                             .foregroundStyle(.foreground)
                     } else {
@@ -87,7 +124,6 @@ struct GameLogView: View {
                         .foregroundStyle(.foreground)
                     }
                     
-                  
                     if gamePlayer.mvp {
                         Image(systemName: "crown.fill")
                             .foregroundStyle(.yellow)
@@ -100,3 +136,4 @@ struct GameLogView: View {
         }
     }
 }
+

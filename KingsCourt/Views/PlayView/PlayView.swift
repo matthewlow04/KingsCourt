@@ -165,12 +165,6 @@ struct PlayView: View {
                     player.gameSteals = 0
                 }
             }
-
-            .onDisappear{
-//                vm.players = []
-//                vm.homeTeam = Array(repeating: nil, count: vm.gameOption)
-//                vm.awayTeam = Array(repeating: nil, count: vm.gameOption)
-            }
         }
     }
     
