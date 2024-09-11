@@ -15,6 +15,7 @@ class AddPlayerViewModel: ObservableObject{
     @Published var positions: [Player.Position] = []
     @Published var showingAlert = false
     var alertMessage = ""
+    var alertTitle = ""
     var modelContext: ModelContext? = nil
 
     func togglePosition(_ position: Player.Position) {
@@ -33,6 +34,7 @@ class AddPlayerViewModel: ObservableObject{
         if validateFields(){
             let player = Player(id: UUID(), firstName: firstName, lastName: lastName, notes: notes, position: positions)
             modelContext?.insert(player)
+            alertTitle = "Success"
             alertMessage = "Player added"
             showingAlert = true
             clearFields()
@@ -53,11 +55,13 @@ class AddPlayerViewModel: ObservableObject{
         }
         
         if missingFields.count > 1 {
+            alertTitle = "Error"
             alertMessage = "More than one required field is missing"
             showingAlert = true
             return false
         }
         else if missingFields.count == 1{
+            alertTitle = "Error"
             alertMessage = "Please enter a \(missingFields[0])"
             showingAlert = true
             return false

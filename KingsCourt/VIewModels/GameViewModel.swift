@@ -13,6 +13,7 @@ class GameViewModel: ObservableObject {
     @Published var homeTeam: Team? = nil
     @Published var awayTeam: Team? = nil
     @Published var showingAlert = false
+    var alertTitle = ""
     var alertMessage = ""
     var modelContext: ModelContext? = nil
     

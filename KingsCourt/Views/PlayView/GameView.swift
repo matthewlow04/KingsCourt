@@ -58,6 +58,7 @@ struct GameView: View {
             Button(action: {
                 vm.finishGame()
                 vm.alertMessage = "GG!"
+                vm.alertTitle = "Game Over"
                 vm.showingAlert = true
             }, label: {
                 Text("Finish")
@@ -69,7 +70,7 @@ struct GameView: View {
         .navigationTitle("King's Court")
         .alert(isPresented: $vm.showingAlert){
             Alert(
-                title: Text("GAME OVER"),
+                title: Text(vm.alertTitle),
                 message: Text(vm.alertMessage),
                 dismissButton: .default(Text("OK")){
                     dismiss()

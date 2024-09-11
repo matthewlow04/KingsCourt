@@ -81,7 +81,7 @@ struct AddPlayerView: View {
             .navigationTitle("Add Player")
             .alert(isPresented: $vm.showingAlert){
                 Alert(
-                    title: Text("Success"),
+                    title: Text(vm.alertTitle),
                     message: Text(vm.alertMessage),
                     dismissButton: .default(Text("OK"))
                 )
