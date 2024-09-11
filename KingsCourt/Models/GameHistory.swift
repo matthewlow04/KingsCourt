@@ -42,11 +42,19 @@ class GameHistoryTeam{
 class GameHistoryPlayer{
     var player: Player
     var points: Int
+    var assists: Int
+    var rebounds: Int
+    var steals: Int
+    var blocks: Int
     var mvp: Bool
     
-    init(player: Player, points: Int, mvp: Bool) {
+    init(player: Player, points: Int, assists: Int, rebounds: Int, steals: Int, blocks: Int, mvp: Bool) {
         self.player = player
         self.points = points
+        self.assists = assists
+        self.rebounds = rebounds
+        self.steals = steals
+        self.blocks = blocks
         self.mvp = mvp
     }
 }

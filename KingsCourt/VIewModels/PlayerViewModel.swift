@@ -16,6 +16,7 @@ class PlayerViewModel: ObservableObject{
     @Published var showingPhoto = false
     @Published var showingDeleteConfirm = false
     @Published var showingAlert = false
+    @Published var gameHistory: [GameHistory] = []
     var alertMessage = ""
     var alertTitle = ""
     var modelContext: ModelContext? = nil
@@ -61,6 +62,30 @@ class PlayerViewModel: ObservableObject{
         
         modelContext?.delete(player)
         return true
+    }
+    
+    func fetchLastFive(player: Player){
+        let fetchDescriptor = FetchDescriptor<GameHistory>(
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
+        )
+        
+        let gameHistories = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
+        let filteredGames = gameHistories.filter { gameHistory in
+            gameHistory.awayTeam.players.contains { $0.player == player } ||
+            gameHistory.homeTeam.players.contains { $0.player == player }
+        }
+        
+        gameHistory = Array(filteredGames.prefix(5))
+    }
+    
+    func findPlayerInGame(player: Player, gameHistory: GameHistory) -> GameHistoryPlayer? {
+        if let gamePlayer = gameHistory.awayTeam.players.first(where: { $0.player.id == player.id }) {
+            return gamePlayer
+        }
+        if let gamePlayer = gameHistory.homeTeam.players.first(where: { $0.player.id == player.id }) {
+            return gamePlayer
+        }
+        return nil 
     }
     
 }

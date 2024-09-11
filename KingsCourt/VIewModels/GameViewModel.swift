@@ -23,7 +23,8 @@ class GameViewModel: ObservableObject {
             return
         }
         let allPlayers = homeTeam.players + awayTeam.players
-        guard let overallMVP = allPlayers.max(by: { $0.gamePoints < $1.gamePoints }) else {
+    
+        guard let overallMVP = allPlayers.max(by: { $0.gameScore < $1.gameScore }) else {
             return
         }
         
@@ -31,6 +32,10 @@ class GameViewModel: ObservableObject {
             GameHistoryPlayer(
                 player: player,
                 points: player.gamePoints,
+                assists: player.gameAssists,
+                rebounds: player.gameRebounds,
+                steals: player.gameSteals,
+                blocks: player.gameBlocks,
                 mvp: player.id == overallMVP.id
             )
         }
@@ -39,6 +44,10 @@ class GameViewModel: ObservableObject {
             GameHistoryPlayer(
                 player: player,
                 points: player.gamePoints,
+                assists: player.gameAssists,
+                rebounds: player.gameRebounds,
+                steals: player.gameSteals,
+                blocks: player.gameBlocks,
                 mvp: player.id == overallMVP.id
             )
         }

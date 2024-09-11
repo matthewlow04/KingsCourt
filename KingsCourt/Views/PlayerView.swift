@@ -56,6 +56,7 @@ struct PlayerView: View {
         }
         .onAppear{
             vm.modelContext = modelContext
+            vm.fetchLastFive(player: player)
         }
         .fullScreenCover(isPresented: $vm.showingPhoto, content: {
             if let photo = player.photo, let uiImage = UIImage(data:photo){
@@ -72,6 +73,7 @@ struct PlayerView: View {
                     VStack(alignment: .leading) {
                         Text(player.firstName + " " + player.lastName)
                             .font(.largeTitle)
+                            .lineLimit(1)
                         Text(player.position.map { $0.rawValue }.joined(separator: " "))
                             .font(.caption)
                             .foregroundStyle(.gray)
@@ -136,6 +138,66 @@ struct PlayerView: View {
                             .toggleStyle(.switch)
                     }
                 }
+                Section{
+                    VStack {
+                        HStack{
+                            Text("Date:")
+                            Spacer()
+                            Text("PTS")
+                                .frame(width: 30)
+                            Text("AST")
+                                .frame(width: 30)
+                            Text("RBD")
+                                .frame(width: 30)
+                            Text("STL")
+                                .frame(width: 30)
+                            Text("BLK")
+                                .frame(width: 30)
+                        }
+                        .font(.footnote)
+                        .opacity(0.3)
+                        
+                        if vm.gameHistory.isEmpty {
+                            Text("No Recent Games")
+                                .italic()
+                                .opacity(0.3)
+                                .padding()
+                        } else {
+                            List {
+                                ForEach(vm.gameHistory) { gameHistory in
+                                    HStack {
+                                        Text(gameHistory.date, format: Date.FormatStyle()
+                                                           .month(.twoDigits)
+                                                           .day(.twoDigits)
+                                                           .year(.twoDigits))
+                                        
+                                        Spacer()
+                                        if let gamePlayer = vm.findPlayerInGame(player: player, gameHistory: gameHistory) {
+                                            Text("\(gamePlayer.points)")
+                                                .frame(width: 30)
+                                            Text("\(gamePlayer.assists)")
+                                                .frame(width: 30)
+                                            Text("\(gamePlayer.rebounds)")
+                                                .frame(width: 30)
+                                            Text("\(gamePlayer.steals)")
+                                                .frame(width: 30)
+                                            Text("\(gamePlayer.blocks)")
+                                                .frame(width: 30)
+                                        } else {
+                                            ForEach(0..<4){_ in 
+                                                Text("-")
+                                                    .frame(width: 30)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                } header: {
+                    Text("Recent Games")
+                }
                 Section {
                     VStack{
                         HStack{
@@ -156,6 +218,8 @@ struct PlayerView: View {
                         }
                     }
                   
+                } header: {
+                    Text("Win/Loss")
                 }
                 Button {
                     vm.showingDeleteConfirm = true
@@ -176,10 +240,7 @@ struct PlayerView: View {
         
                 Button("Cancel", role: .cancel) { }
             }
-            
-
         }
-       
     }
     
     private var closeButton: some View {

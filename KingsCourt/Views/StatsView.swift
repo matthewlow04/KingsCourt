@@ -104,6 +104,7 @@ struct StatsView: View {
                                     }
                                     VStack(alignment: .leading) {
                                         Text(player.firstName + " " + player.lastName)
+                                            .lineLimit(1)
                                         Text(player.position.map { $0.rawValue }.joined(separator: ", "))
                                             .font(.caption)
                                             .foregroundStyle(.gray)

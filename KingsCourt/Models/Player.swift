@@ -58,6 +58,14 @@ class Player: ObservableObject, Identifiable, Equatable{
         return Double(plusMinus)/Double(games)
     }
     
+    var gameScore: Double{
+        let reboundsScore = Double(gameRebounds) * 0.7
+        let stealsScore = Double(gameSteals) * 1.2
+        let blocksScore = Double(gameBlocks) * 1.2
+        let pointsScore = Double(gamePoints) * 1.1
+        return pointsScore + Double(gameAssists) + reboundsScore + stealsScore + blocksScore
+    }
+    
     var title: String{
         if games >= 25{
             return experienceTitle.veteran.rawValue

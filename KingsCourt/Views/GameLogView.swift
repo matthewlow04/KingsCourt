@@ -111,29 +111,74 @@ struct GameLogView: View {
                 Text(String(team.points))
                     .font(.largeTitle)
             }
+
+            statHeaderView()
+                .padding(.leading, 50)
             
             ForEach(team.players, id: \.player.id) { gamePlayer in
-                HStack {
-                    if vm.checkDeletedPlayer(player: gamePlayer) {
-                        Text("Deleted Player")
-                            .foregroundStyle(.foreground)
-                    } else {
-                        NavigationLink(destination: PlayerView(player: gamePlayer.player)) {
-                            Text("\(gamePlayer.player.firstName.prefix(1)). \(gamePlayer.player.lastName)")
-                        }
-                        .foregroundStyle(.foreground)
-                    }
-                    
-                    if gamePlayer.mvp {
-                        Image(systemName: "crown.fill")
-                            .foregroundStyle(.yellow)
-                    }
-                    Spacer()
-                    Text(String(gamePlayer.points))
-                }
+                playerStatsView(for: gamePlayer)
             }
             .font(.subheadline)
         }
     }
+
+    @ViewBuilder
+    func statHeaderView() -> some View {
+        HStack(spacing: 4) {
+            Spacer()
+            statHeaderText("PTS")
+            statHeaderText("AST")
+            statHeaderText("RBD")
+            statHeaderText("STL")
+            statHeaderText("BLK")
+        }
+    }
+
+    @ViewBuilder
+    func statHeaderText(_ title: String) -> some View {
+        Text(title)
+            .font(.footnote)
+            .opacity(0.3)
+            .frame(width: 30)
+    }
+
+    @ViewBuilder
+    func playerStatsView(for gamePlayer: GameHistoryPlayer) -> some View {
+        HStack {
+
+            if vm.checkDeletedPlayer(player: gamePlayer) {
+                Text("Deleted Player")
+                    .foregroundStyle(.foreground)
+            } else {
+                NavigationLink(destination: PlayerView(player: gamePlayer.player)) {
+                    Text("\(gamePlayer.player.firstName.prefix(1)). \(gamePlayer.player.lastName)")
+                        .lineLimit(1)
+                }
+                .foregroundStyle(.foreground)
+            }
+
+            if gamePlayer.mvp {
+                Image(systemName: "crown.fill")
+                    .foregroundStyle(.yellow)
+            }
+            Spacer()
+
+            HStack(spacing: 4) {
+                statValueText(gamePlayer.points)
+                statValueText(gamePlayer.assists)
+                statValueText(gamePlayer.rebounds)
+                statValueText(gamePlayer.steals)
+                statValueText(gamePlayer.blocks)
+            }
+        }
+    }
+
+    @ViewBuilder
+    func statValueText(_ value: Int) -> some View {
+        Text(String(value))
+            .frame(width: 30)
+    }
+
+
 }
 

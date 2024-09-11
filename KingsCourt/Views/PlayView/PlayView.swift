@@ -192,6 +192,7 @@ struct PlayView: View {
                                         CircleImage(picture: "avatar", size: 50)
                                     }
                                     Text(player.firstName + " " + player.lastName)
+                                        .lineLimit(1)
                                     Spacer()
                                     Text(player.position.map { $0.rawValue }.joined(separator: ", "))
                                         .font(.caption)

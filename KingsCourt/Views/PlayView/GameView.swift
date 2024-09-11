@@ -126,6 +126,7 @@ struct PlayerScoreView: View {
     var body: some View {
         HStack(spacing: 25) {
             Text(player.firstName.prefix(1) + "." + player.lastName)
+                .lineLimit(1)
             
             Spacer()
             
