@@ -47,6 +47,13 @@ struct PlayerView: View {
                 }
             }
         }
+        .alert(isPresented: $vm.showingAlert){
+            Alert(
+                title: Text(vm.alertTitle),
+                message: Text(vm.alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .onAppear{
             vm.modelContext = modelContext
         }
@@ -162,8 +169,9 @@ struct PlayerView: View {
             .confirmationDialog("Delete Player", isPresented: $vm.showingDeleteConfirm) {
                 
                 Button("Delete", role: .destructive){
-                    vm.deletePlayer(player: player)
-                    dismiss()
+                    if (vm.deletePlayer(player: player)){
+                        dismiss()
+                    }
                 }
         
                 Button("Cancel", role: .cancel) { }

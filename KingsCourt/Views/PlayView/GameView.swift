@@ -56,10 +56,16 @@ struct GameView: View {
             .scrollIndicators(.hidden)
             
             Button(action: {
-                vm.finishGame()
-                vm.alertMessage = "GG!"
-                vm.alertTitle = "Game Over"
-                vm.showingAlert = true
+                if homeTeam.points == awayTeam.points{
+                    vm.alertTitle = "Tie"
+                    vm.alertMessage = "Can't End On A Tie"
+                    vm.showingAlert = true
+                }else {
+                    vm.finishGame()
+                    vm.alertMessage = "GG!"
+                    vm.alertTitle = "Game Over"
+                    vm.showingAlert = true
+                }
             }, label: {
                 Text("Finish")
                     .modifier(GoButtonModifier())
@@ -73,7 +79,9 @@ struct GameView: View {
                 title: Text(vm.alertTitle),
                 message: Text(vm.alertMessage),
                 dismissButton: .default(Text("OK")){
-                    dismiss()
+                    if(vm.gameOver){
+                        dismiss()
+                    }
                 }
             )
         }
@@ -87,15 +95,23 @@ struct GameView: View {
             }
         }
         .onAppear{
+            vm.gameOver = false
             if vm.homeTeam == nil && vm.awayTeam == nil {
                 vm.modelContext = modelContext
                 vm.homeTeam = homeTeam
                 vm.awayTeam = awayTeam
                 vm.clearStats()
             }
+            for player in awayTeam.players{
+                player.inGame = true
+            }
+            
+            for player in homeTeam.players{
+                player.inGame = true
+            }
         }
         .onDisappear{
-            vm.clearStats()
+//            vm.clearStats()
         }
     }
 }

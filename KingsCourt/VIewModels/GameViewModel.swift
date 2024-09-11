@@ -12,6 +12,7 @@ class GameViewModel: ObservableObject {
     @Published var isAdding: Bool = true
     @Published var homeTeam: Team? = nil
     @Published var awayTeam: Team? = nil
+    @Published var gameOver = false
     @Published var showingAlert = false
     var alertTitle = ""
     var alertMessage = ""
@@ -100,7 +101,16 @@ class GameViewModel: ObservableObject {
             }
         }
         
+        for player in awayTeam.players{
+            player.inGame = false
+        }
+        
+        for player in homeTeam.players{
+            player.inGame = false
+        }
+        
         modelContext?.insert(gameHistory)
+        gameOver = true
         clearStats()
     }
     

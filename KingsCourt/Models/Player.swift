@@ -32,6 +32,7 @@ class Player: ObservableObject, Identifiable, Equatable{
     var photo: Data?
     var streak: Int = 0
     var plusMinus: Int = 0
+    var inGame = false
     
     var ppg: Double{
         return Double(points)/Double(games)

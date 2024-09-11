@@ -96,10 +96,80 @@ struct PlayView: View {
             .sheet(isPresented: $vm.showingSheet, content: {
                 sheetPickerView
             })
+            .toolbar{
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Button("Clear All Data"){
+//                        do {
+//                            try modelContext.delete(model: Player.self)
+//                            try modelContext.delete(model: GameHistory.self)
+//                        } catch {
+//                            print("Failed to clear all data.")
+//                        }
+//                    }
+//                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Clear Teams"){
+                        for player in vm.homeTeam.compactMap({$0}){
+                            player.inGame = false
+                        }
+                        for player in vm.awayTeam.compactMap({$0}){
+                            player.inGame = false
+                        }
+                        vm.awayTeam = Array(repeating: nil, count: vm.gameOption)
+                        vm.homeTeam = Array(repeating: nil, count: vm.gameOption)
+                    }
+                }
+            }
             .navigationTitle("Set Up")
             .onAppear{
                 vm.modelContext = modelContext
                 vm.fetchPlayers()
+
+                for player in vm.players {
+                    if !vm.homeTeam.contains(where: { $0?.id == player.id }) &&
+                       !vm.awayTeam.contains(where: { $0?.id == player.id }) {
+                        player.inGame = false
+                    } else {
+                        player.inGame = true
+                    }
+                }
+
+                for (index, player) in vm.awayTeam.enumerated() {
+                    if let player = player, !vm.players.contains(where: { $0.id == player.id }) {
+                        vm.awayTeam[index] = nil
+                    }
+                }
+                vm.compactTeam(&vm.awayTeam)
+
+            
+                for player in vm.awayTeam.compactMap({$0}){
+                    player.gamePoints = 0
+                    player.gameAssists = 0
+                    player.gameBlocks = 0
+                    player.gameRebounds = 0
+                    player.gameSteals = 0
+                }
+
+                for (index, player) in vm.homeTeam.enumerated() {
+                    if let player = player, !vm.players.contains(where: { $0.id == player.id }) {
+                        vm.homeTeam[index] = nil
+                    }
+                }
+                vm.compactTeam(&vm.homeTeam)
+
+                for player in vm.homeTeam.compactMap({$0}){
+                    player.gamePoints = 0
+                    player.gameAssists = 0
+                    player.gameBlocks = 0
+                    player.gameRebounds = 0
+                    player.gameSteals = 0
+                }
+            }
+
+            .onDisappear{
+//                vm.players = []
+//                vm.homeTeam = Array(repeating: nil, count: vm.gameOption)
+//                vm.awayTeam = Array(repeating: nil, count: vm.gameOption)
             }
         }
     }

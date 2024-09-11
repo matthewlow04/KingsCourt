@@ -53,6 +53,7 @@ class PlayViewModel: ObservableObject {
         case .home:
             if let index = homeTeam.firstIndex(where: { $0?.id == player.id }) {
                 homeTeam[index] = nil
+                player.inGame = false
                 compactTeam(&homeTeam)
             } else if homeTeam.filter({ $0 != nil }).count < gameOption {
                 if let index = homeTeam.firstIndex(where: { $0 == nil }) {
@@ -62,6 +63,7 @@ class PlayViewModel: ObservableObject {
         case .away:
             if let index = awayTeam.firstIndex(where: { $0?.id == player.id }) {
                 awayTeam[index] = nil
+                player.inGame = false
                 compactTeam(&awayTeam)
             } else if awayTeam.filter({ $0 != nil }).count < gameOption {
                 if let index = awayTeam.firstIndex(where: { $0 == nil }) {
@@ -80,7 +82,7 @@ class PlayViewModel: ObservableObject {
         }
     }
     
-    private func compactTeam(_ team: inout [Player?]) {
+    func compactTeam(_ team: inout [Player?]) {
         team = team.compactMap { $0 } + Array(repeating: nil, count: gameOption - team.compactMap { $0 }.count)
     }
     
@@ -90,6 +92,8 @@ class PlayViewModel: ObservableObject {
         )
         
         players = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
+        players = players.filter { !($0.firstName == "Deleted" && $0.lastName == "Player") }
+
     }
     
 }

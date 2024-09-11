@@ -20,4 +20,8 @@ class GameLogViewModel: ObservableObject {
         
         gameHistories = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
     }
+    
+    func checkDeletedPlayer(player: GameHistoryPlayer) -> Bool{
+        return (player.player.firstName == "Deleted" && player.player.lastName == "Player")
+    }
 }

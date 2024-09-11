@@ -77,10 +77,17 @@ struct GameLogView: View {
             
             ForEach(team.players, id: \.player.id) { gamePlayer in
                 HStack {
-                    NavigationLink(destination: PlayerView(player: gamePlayer.player)) {
-                        Text("\(gamePlayer.player.firstName.prefix(1)). \(gamePlayer.player.lastName)")
+                    if vm.checkDeletedPlayer(player: gamePlayer){
+                        Text("Deleted Player")
+                            .foregroundStyle(.foreground)
+                    } else {
+                        NavigationLink(destination: PlayerView(player: gamePlayer.player)) {
+                            Text("\(gamePlayer.player.firstName.prefix(1)). \(gamePlayer.player.lastName)")
+                        }
+                        .foregroundStyle(.foreground)
                     }
-                    .foregroundStyle(.foreground)
+                    
+                  
                     if gamePlayer.mvp {
                         Image(systemName: "crown.fill")
                             .foregroundStyle(.yellow)

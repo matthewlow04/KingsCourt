@@ -42,5 +42,6 @@ class StatsViewModel: ObservableObject {
         )
         
         players = (try? (modelContext?.fetch(fetchDescriptor) ?? [])) ?? []
+        players = players.filter { !($0.firstName == "Deleted" && $0.lastName == "Player") }
     }
 }

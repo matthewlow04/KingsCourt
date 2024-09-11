@@ -15,6 +15,9 @@ class PlayerViewModel: ObservableObject{
     @Published var selectedPhoto: PhotosPickerItem?
     @Published var showingPhoto = false
     @Published var showingDeleteConfirm = false
+    @Published var showingAlert = false
+    var alertMessage = ""
+    var alertTitle = ""
     var modelContext: ModelContext? = nil
     
     
@@ -26,7 +29,14 @@ class PlayerViewModel: ObservableObject{
         player.photo = data
     }
     
-    func deletePlayer(player: Player){
+    func deletePlayer(player: Player) -> Bool{
+        
+        if player.inGame{
+            alertTitle = "Error"
+            alertMessage = "You can't delete a player that is currently in a game or selected in setup"
+            showingAlert = true
+            return false
+        }
         
         let fetchDescriptor = FetchDescriptor<GameHistory>(
             sortBy: [SortDescriptor(\.date, order: .reverse)]
@@ -50,6 +60,7 @@ class PlayerViewModel: ObservableObject{
         }
         
         modelContext?.delete(player)
+        return true
     }
     
 }
