@@ -11,98 +11,103 @@ struct AddPlayerView: View {
     @StateObject var vm = AddPlayerViewModel()
     @Environment(\.modelContext) var modelContext
     
-    
     var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: 20) {
-                Group{
-                    HStack(spacing: 2){
-                        Text("First Name")
-                        Text(vm.firstName.isEmpty ? "*" : "")
-                            .foregroundStyle(.red)
-                    }
-                    
-                    TextField("First Name", text: $vm.firstName)
-                        .modifier(FormTextfieldModifier())
-                        .padding(.horizontal, 2)
-                        .autocorrectionDisabled()
-                        .onChange(of: vm.firstName) { oldValue, newValue in
-                            if newValue.count > 12 {
-                                vm.firstName = String(newValue.prefix(12))
-                            }
+        NavigationStack{
+            ScrollView{
+                VStack(alignment: .leading, spacing: 20) {
+                    Group{
+                        HStack(spacing: 2){
+                            Text("First Name")
+                            Text(vm.firstName.isEmpty ? "*" : "")
+                                .foregroundStyle(.red)
                         }
-                }
-               
-                Group{
-                    HStack(spacing: 2){
-                        Text("Last Name")
-                        Text(vm.lastName.isEmpty ? "*" : "")
-                            .foregroundStyle(.red)
-                    }
-                    TextField("Last Name", text: $vm.lastName)
-                        .modifier(FormTextfieldModifier())
-                        .padding(.horizontal, 2)
-                        .autocorrectionDisabled()
-                        .onChange(of: vm.lastName) { oldValue, newValue in
-                            if newValue.count > 12 {
-                                vm.lastName = String(newValue.prefix(12))
-                            }
-                        }
-                }
-                Group{
-                    Text("Notes")
-                    TextField("Notes", text: $vm.notes)
-                        .modifier(FormTextfieldModifier())
-                        .padding(.horizontal, 2)
-                }
-                Group{
-                    HStack(spacing: 2){
-                        Text("Positions")
-                        Text(vm.positions.isEmpty ? "*" : "")
-                            .foregroundStyle(.red)
-                    }
-                    HStack{
-                        Spacer()
-                        HStack {
-                            ForEach(Player.Position.allCases, id: \.self) { position in
-                                Button(action: {
-                                    vm.togglePosition(position)
-                                }) {
-                                    Text(position.rawValue)
-                                        .modifier(PickerCapsuleModifier())
-                                        .opacity(vm.isPositionSelected(position) ? 1.0 : 0.3)
+                        
+                        TextField("First Name", text: $vm.firstName)
+                            .modifier(FormTextfieldModifier())
+                            .padding(.horizontal, 2)
+                            .autocorrectionDisabled()
+                            .onChange(of: vm.firstName) { oldValue, newValue in
+                                if newValue.count > 12 {
+                                    vm.firstName = String(newValue.prefix(12))
                                 }
                             }
+                    }
+                   
+                    Group{
+                        HStack(spacing: 2){
+                            Text("Last Name")
+                            Text(vm.lastName.isEmpty ? "*" : "")
+                                .foregroundStyle(.red)
                         }
-                        Spacer()
+                        TextField("Last Name", text: $vm.lastName)
+                            .modifier(FormTextfieldModifier())
+                            .padding(.horizontal, 2)
+                            .autocorrectionDisabled()
+                            .onChange(of: vm.lastName) { oldValue, newValue in
+                                if newValue.count > 12 {
+                                    vm.lastName = String(newValue.prefix(12))
+                                }
+                            }
+                    }
+                    Group{
+                        Text("Notes")
+                        TextField("Notes", text: $vm.notes)
+                            .modifier(FormTextfieldModifier())
+                            .padding(.horizontal, 2)
+                    }
+                    Group{
+                        HStack(spacing: 2){
+                            Text("Positions")
+                            Text(vm.positions.isEmpty ? "*" : "")
+                                .foregroundStyle(.red)
+                        }
+                        HStack{
+                            Spacer()
+                            HStack {
+                                ForEach(Player.Position.allCases, id: \.self) { position in
+                                    Button(action: {
+                                        vm.togglePosition(position)
+                                    }) {
+                                        Text(position.rawValue)
+                                            .modifier(PickerCapsuleModifier())
+                                            .opacity(vm.isPositionSelected(position) ? 1.0 : 0.3)
+                                    }
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                    
+                    Spacer()
+                    Button {
+                        vm.addPlayer()
+                    } label: {
+                        Text("Add Player")
+                            .modifier(GoButtonModifier())
+                            .padding(.vertical)
                     }
                 }
                 
-                Spacer()
-                Button {
-                    vm.addPlayer()
-                } label: {
-                    Text("Add Player")
-                        .modifier(GoButtonModifier())
-                        .padding(.vertical)
+                .padding(.horizontal)
+                .navigationTitle("Add Player")
+                .alert(isPresented: $vm.showingAlert){
+                    Alert(
+                        title: Text(vm.alertTitle),
+                        message: Text(vm.alertMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
                 }
-            }
-            .padding(.horizontal)
-            .navigationTitle("Add Player")
-            .alert(isPresented: $vm.showingAlert){
-                Alert(
-                    title: Text(vm.alertTitle),
-                    message: Text(vm.alertMessage),
-                    dismissButton: .default(Text("OK"))
-                )
-            }
-            .onAppear{
-                vm.modelContext = modelContext
-            }
-            .onDisappear{
-                vm.clearFields()
+              
+                .onAppear{
+                    vm.modelContext = modelContext
+                }
+                .onDisappear{
+                    vm.clearFields()
+                }
+               
             }
         }
+                
     }
 }
 

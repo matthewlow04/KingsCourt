@@ -68,7 +68,7 @@ struct ProfileImageModifier: ViewModifier{
     func body(content: Content) -> some View {
         content
             .frame(width: size, height: size)
-            .aspectRatio(contentMode: .fit)
+            .aspectRatio(contentMode: .fill)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 2))
 

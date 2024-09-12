@@ -23,7 +23,7 @@ struct StatsView: View {
                                 .fontWeight(.semibold)
                                 .autocorrectionDisabled(true)
                             
-                            HStack {
+                            HStack (spacing: 15){
                                 Text("Filters: ")
                                 
                                 ForEach(Player.Position.allCases, id: \.self) { position in
@@ -36,7 +36,7 @@ struct StatsView: View {
                                     } label: {
                                         Text(position.rawValue)
                                     }
-                                    .scaleEffect(vm.selectedPositions.contains(position) ? 1.3 : 1.1)
+                                    .scaleEffect(vm.selectedPositions.contains(position) ? 1.5 : 1.3)
                                     .foregroundStyle(vm.selectedPositions.contains(position) ? Color.accentColor : .gray)
                                 }
                             }
