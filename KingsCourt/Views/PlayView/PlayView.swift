@@ -36,8 +36,18 @@ struct PlayView: View {
                             Text("Home Team")
                             ForEach(0..<vm.gameOption, id: \.self) { index in
                                 if let player = vm.homeTeam[index] {
-                                    Text("\(player.firstName) \(player.lastName)")
-                                        .modifier(PlayerPickModifier())
+                                    ZStack{
+                                        Text("\(player.firstName) \(player.lastName)")
+                                        HStack{
+                                            Spacer()
+                                            Text(player.position.map { $0.rawValue }.joined(separator: ", "))
+                                                .font(.caption)
+                                                .foregroundStyle(.gray)
+                                                .padding(.leading)
+                                        }
+                                      
+                                    }
+                                    .modifier(PlayerPickModifier())
                                 } else {
                                     Text("Empty Spot")
                                         .modifier(PlayerPickModifier())
@@ -58,8 +68,18 @@ struct PlayView: View {
                             Text("Away Team")
                             ForEach(0..<vm.gameOption, id: \.self) { index in
                                 if let player = vm.awayTeam[index] {
-                                    Text("\(player.firstName) \(player.lastName)")
-                                        .modifier(PlayerPickModifier())
+                                    ZStack{
+                                        Text("\(player.firstName) \(player.lastName)")
+                                        HStack{
+                                            Spacer()
+                                            Text(player.position.map { $0.rawValue }.joined(separator: ", "))
+                                                .font(.caption)
+                                                .foregroundStyle(.gray)
+                                                .padding(.leading)
+                                        }
+                                      
+                                    }
+                                    .modifier(PlayerPickModifier())
                                 } else {
                                     Text("Empty Spot")
                                         .modifier(PlayerPickModifier())

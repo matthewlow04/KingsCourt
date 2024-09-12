@@ -230,16 +230,21 @@ struct PlayerView: View {
                 }
                 .listRowBackground(Color.clear)
             }
-            .confirmationDialog("Delete Player", isPresented: $vm.showingDeleteConfirm) {
-                
-                Button("Delete", role: .destructive){
-                    if (vm.deletePlayer(player: player)){
+            .confirmationDialog(
+                "Delete Player",
+                isPresented: $vm.showingDeleteConfirm
+            ) {
+                Button("Delete", role: .destructive) {
+                    if (vm.deletePlayer(player: player)) {
                         dismiss()
                     }
                 }
-        
+
                 Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Are you sure you want to delete this player?")
             }
+
         }
     }
     

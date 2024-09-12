@@ -67,9 +67,10 @@ struct StatsView: View {
                             Picker("Sorting Options", selection: $vm.sortOption) {
                                 Text("First Name").tag(0)
                                 Text("Last Name").tag(1)
-                                Text("Assists").tag(2)
-                                Text("Rebounds").tag(3)
-                                Text("Date Created").tag(4)
+                                Text("Points").tag(2)
+                                Text("Assists").tag(3)
+                                Text("Rebounds").tag(4)
+                                Text("Date Created").tag(5)
                             }
                         }
                         label: {
@@ -110,10 +111,24 @@ struct StatsView: View {
                                             .foregroundStyle(.gray)
                                     }
                                     Spacer()
+                                    switch vm.sortOption{                         
+                                    case 2:
+                                        Text("\(vm.formattedStat(player.ppg)) ppg")
+                                            .padding()
+                                    case 3:
+                                        Text("\(vm.formattedStat(player.apg)) apg")
+                                            .padding()
+                                    case 4:
+                                        Text("\(vm.formattedStat(player.rpg)) rpg")
+                                            .padding()
+                                    default:
+                                        Text("")
+                                    }
                                 }
                             }
                             Divider()
                         }
+                        .foregroundStyle(.foreground)
                     }
                 }
                 .animation(.easeIn, value: vm.sortedPlayers)

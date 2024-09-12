@@ -23,6 +23,7 @@ class StatsViewModel: ObservableObject {
             (selectedPositions.isEmpty || selectedPositions.allSatisfy { player.position.contains($0) })
         }
     }
+    
     var sortedPlayers: [Player] {
         let players = filteredPlayers
         switch sortOption {
@@ -30,10 +31,22 @@ class StatsViewModel: ObservableObject {
             return players.sorted { sortDescending ? ($0.firstName > $1.firstName) : ($0.firstName < $1.firstName)  }
         case 1:
             return players.sorted { sortDescending ? ($0.lastName > $1.lastName) : ($0.lastName < $1.lastName)  }
+        case 2:
+            return players.sorted { sortDescending ? ($0.ppg > $1.ppg) : ($0.ppg < $1.ppg)  }
+        case 3:
+            return players.sorted { sortDescending ? ($0.apg > $1.apg) : ($0.apg < $1.apg)  }
+        case 4:
+            return players.sorted { sortDescending ? ($0.rpg > $1.rpg) : ($0.rpg < $1.rpg)  }
+        case 5:
+            return players.sorted { sortDescending ? ($0.date ?? Date.distantPast > $1.date ?? Date.distantPast) : ($0.date ?? Date.distantPast < $1.date ?? Date.distantPast)  }
         default:
             return players
         }
 
+    }
+    
+    func formattedStat(_ stat: Double) -> String {
+        String(format: "%.2f", stat)
     }
     
     func fetchPlayers(){

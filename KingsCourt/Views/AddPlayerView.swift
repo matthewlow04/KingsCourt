@@ -26,6 +26,11 @@ struct AddPlayerView: View {
                         .modifier(FormTextfieldModifier())
                         .padding(.horizontal, 2)
                         .autocorrectionDisabled()
+                        .onChange(of: vm.firstName) { oldValue, newValue in
+                            if newValue.count > 12 {
+                                vm.firstName = String(newValue.prefix(12))
+                            }
+                        }
                 }
                
                 Group{
@@ -38,6 +43,11 @@ struct AddPlayerView: View {
                         .modifier(FormTextfieldModifier())
                         .padding(.horizontal, 2)
                         .autocorrectionDisabled()
+                        .onChange(of: vm.lastName) { oldValue, newValue in
+                            if newValue.count > 12 {
+                                vm.lastName = String(newValue.prefix(12))
+                            }
+                        }
                 }
                 Group{
                     Text("Notes")

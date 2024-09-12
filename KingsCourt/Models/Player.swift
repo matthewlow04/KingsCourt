@@ -33,6 +33,7 @@ class Player: ObservableObject, Identifiable, Equatable{
     var streak: Int = 0
     var plusMinus: Int = 0
     var inGame = false
+    var date: Date?
     
     var ppg: Double{
         return Double(points)/Double(games)
@@ -80,12 +81,13 @@ class Player: ObservableObject, Identifiable, Equatable{
         }
     }
     
-    init(id: UUID, firstName: String, lastName: String, notes: String? = nil, position: [Position]) {
+    init(id: UUID, firstName: String, lastName: String, notes: String? = nil, position: [Position], date: Date = Date.now) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.notes = notes
         self.position = position
+        self.date = date
     }
     
     enum Position: String, Codable, CaseIterable {

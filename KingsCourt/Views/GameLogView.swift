@@ -49,7 +49,6 @@ struct GameLogView: View {
                     Button {
                         vm.selectedDate = nil
                         vm.showingDatePicker = false
-                        vm.fetchGameLog()
                     } label: {
                         Text("Show All Dates")
                             .modifier(GoButtonModifier())
@@ -58,11 +57,13 @@ struct GameLogView: View {
                     
                     Button {
                         vm.showingDatePicker = false
-                        vm.fetchGameLog()
                     } label: {
                         Text("Done")
                             .modifier(GoButtonModifier())
                             .padding()
+                    }
+                    .onDisappear{
+                        vm.fetchGameLog()
                     }
 
                 }
